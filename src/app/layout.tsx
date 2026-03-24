@@ -4,7 +4,6 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -51,7 +50,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased bg-sand text-charcoal min-h-screen relative overflow-x-hidden`}
       >
-        <BackgroundBeams className="fixed inset-0 pointer-events-none z-0" />
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navbar />
           <main className="w-full">

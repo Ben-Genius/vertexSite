@@ -1,53 +1,47 @@
-"use client";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import { HeroSection } from "@/components/sections";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
-import { HeroSection, IntroSection, CorePrinciplesSection, ExpertiseHighlight } from "@/components/sections";
-import { AboutSection } from "@/components/sections";
-import { ServicesSection } from "@/components/sections";
-import { OilGasSection } from "@/components/sections";
-import { ProjectsSection } from "@/components/sections";
-import { TeamSection } from "@/components/sections";
-import { QHSESection } from "@/components/sections";
-import { ContactSection } from "@/components/sections";
-import { WhyChooseUsSection } from "@/components/sections";
+// Dynamic imports for optimization
+const IntroSection = dynamic(() => import("@/components/sections").then(m => m.IntroSection));
+const ExpertiseHighlight = dynamic(() => import("@/components/sections").then(m => m.ExpertiseHighlight));
+const AboutSection = dynamic(() => import("@/components/sections").then(m => m.AboutSection));
+const ServicesSection = dynamic(() => import("@/components/sections").then(m => m.ServicesSection));
+const OilGasSection = dynamic(() => import("@/components/sections").then(m => m.OilGasSection));
+const CorePrinciplesSection = dynamic(() => import("@/components/sections").then(m => m.CorePrinciplesSection));
+const WhyChooseUsSection = dynamic(() => import("@/components/sections").then(m => m.WhyChooseUsSection));
+const ProjectsSection = dynamic(() => import("@/components/sections").then(m => m.ProjectsSection));
+const TeamSection = dynamic(() => import("@/components/sections").then(m => m.TeamSection));
+const QHSESection = dynamic(() => import("@/components/sections").then(m => m.QHSESection));
+const ContactSection = dynamic(() => import("@/components/sections").then(m => m.ContactSection));
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
       <HeroSection />
 
-      {/* Intro */}
-      <IntroSection />
+      <Suspense fallback={<SectionFallback />}>
+        <IntroSection />
+        <ExpertiseHighlight />
+        <AboutSection />
+        <ServicesSection />
+        <OilGasSection />
+        <CorePrinciplesSection />
+        <WhyChooseUsSection />
+        <ProjectsSection />
+        <TeamSection />
+        <QHSESection />
+        <ContactSection />
+      </Suspense>
+    </div>
+  );
+}
 
-      {/* Expertise Highlight */}
-      <ExpertiseHighlight />
-
-      {/* About */}
-      <AboutSection />
-
-      {/* Services */}
-      <ServicesSection />
-
-      {/* Oil & Gas */}
-      <OilGasSection />
-
-      {/* Core Principles */}
-      <CorePrinciplesSection />
-
-      {/* Why Choose Us */}
-      <WhyChooseUsSection />
-
-      {/* Projects */}
-      <ProjectsSection />
-
-      {/* Team/Process */}
-      <TeamSection />
-
-      {/* QHSE */}
-      <QHSESection />
-
-      {/* Contact */}
-      <ContactSection />
+function SectionFallback() {
+  return (
+    <div className="w-full h-[50vh] flex items-center justify-center bg-sand/20">
+      <LoadingSpinner />
     </div>
   );
 }

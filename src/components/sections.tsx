@@ -86,7 +86,6 @@ export function HeroSection() {
         >
           <h1
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-2"
-            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Building Africa&apos;s <span className="text-maroon">Future</span>
           </h1>
@@ -131,9 +130,10 @@ export function IntroSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block px-4 py-2 bg-maroon/20 text-maroon text-sm font-medium rounded-full mb-6 border border-maroon/30 uppercase tracking-widest">
-              Grounded in Ghana
-            </span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-px bg-maroon" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">Grounded</span>
+            </div>
             <p className="text-lg sm:text-xl text-white/80 leading-relaxed  border-l-4 border-maroon pl-6">
               Vertex Ridge Limited is a Ghanaian-owned construction and engineering firm shaped by years of practical experience, delivering world-class infrastructure solutions rooted in local ecosystems.
             </p>
@@ -263,13 +263,13 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block px-4 py-2 bg-gold/10 text-gold text-sm font-medium rounded-full mb-6 uppercase tracking-wider">
-              {/* Tagline from Page 2 */}
-              LOCAL EXPERTISE. ADAPTIVE TEAMS. MEASURABLE VALUE.
-            </span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">About Us</span>
+            </div>
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-6"
-              style={{ fontFamily: "var(--font-playfair)" }}
+
             >
               Grounded in <span className="text-maroon">Ghana</span>, Driven by Excellence
             </h2>
@@ -448,18 +448,21 @@ export function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-left mb-20"
         >
-          <span className="inline-block px-4 py-2 bg-maroon/10 text-maroon text-sm font-medium rounded-full mb-6">
-            Our Services
-          </span>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-px bg-maroon" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">
+              Services
+            </span>
+          </div>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-6"
-            style={{ fontFamily: "var(--font-playfair)" }}
+
           >
             Comprehensive <span className="text-maroon">Solutions</span>
           </h2>
-          <p className="text-charcoal/70 text-lg max-w-7xl mx-auto mb-10">
+          <p className="text-charcoal/70 text-lg max-w-2xl mb-10">
             We offer a full spectrum of construction and engineering services
             tailored to meet the unique needs of each project.
           </p>
@@ -528,12 +531,13 @@ export function OilGasSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block px-4 py-2 bg-gold/10 text-gold text-sm font-medium rounded-full mb-6">
-              Oil & Gas Division
-            </span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">Energy</span>
+            </div>
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-6"
-              style={{ fontFamily: "var(--font-playfair)" }}
+
             >
               Specialized <span className="text-gold">Energy Solutions</span>
             </h2>
@@ -634,18 +638,21 @@ export function ProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-left mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-maroon/10 text-maroon text-sm font-medium rounded-full mb-6">
-            Our Projects
-          </span>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-px bg-maroon" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">
+              Projects
+            </span>
+          </div>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-6"
-            style={{ fontFamily: "var(--font-playfair)" }}
+
           >
             Featured <span className="text-maroon">Projects</span>
           </h2>
-          <p className="text-charcoal/70 text-lg max-w-2xl mx-auto">
+          <p className="text-charcoal/70 text-lg max-w-2xl">
             A showcase of our diverse portfolio across construction, engineering,
             and oil & gas sectors.
           </p>
@@ -752,16 +759,15 @@ export function TeamSection() {
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-px bg-maroon" />
             <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">
-              Methodology
+              Team
             </span>
           </div>
 
           <h2
             className="text-6xl lg:text-7xl font-medium text-charcoal leading-[1.05] mb-8"
-            style={{ fontFamily: "var(--font-playfair)" }}
           >
-            How We <br />
-            <em className="text-maroon italic not-italic">Deliver</em>
+            How We
+            <em className="text-maroon italic not-italic"> Deliver</em>
           </h2>
 
           <p className="text-charcoal/50 text-xl max-w-2xl leading-relaxed font-light">
@@ -795,7 +801,6 @@ export function TeamSection() {
                 </span>
                 <h3
                   className="text-2xl font-bold text-charcoal mb-4 group-hover:text-maroon transition-colors"
-                  style={{ fontFamily: "var(--font-playfair)" }}
                 >
                   {step.title}
                 </h3>
@@ -845,7 +850,7 @@ export function QHSESection() {
   ];
 
   return (
-    <section id="qhse" className="py-32 bg-white relative overflow-hidden">
+    <section id="qhse" className="py-12 bg-white relative overflow-hidden">
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Simplified Header */}
@@ -858,11 +863,11 @@ export function QHSESection() {
           >
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-px bg-maroon" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">Safety & Standards</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">QHSE</span>
             </div>
-            <h2 className="text-5xl lg:text-6xl font-medium text-charcoal leading-tight mb-8" style={{ fontFamily: "var(--font-playfair)" }}>
-              The Ethics of <br />
-              <em className="text-maroon italic not-italic">Vertex Ridge</em>
+            <h2 className="text-5xl lg:text-6xl font-medium text-charcoal leading-tight mb-8">
+              The Ethics of
+              <em className="text-maroon italic not-italic"> Vertex Ridge</em>
             </h2>
             <p className="text-charcoal/50 text-xl font-light leading-relaxed">
               Our commitment to people and the planet is the foundation of our success.
@@ -938,12 +943,12 @@ export function ContactSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block px-4 py-2 bg-maroon/10 text-maroon text-sm font-medium rounded-full mb-6">
-              Get in Touch
-            </span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-px bg-maroon" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">Connect</span>
+            </div>
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-6"
-              style={{ fontFamily: "var(--font-playfair)" }}
             >
               Let&apos;s Build <span className="text-maroon">Together</span>
             </h2>
@@ -1152,14 +1157,16 @@ export function WhyChooseUsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-left mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-gold/10 text-gold text-sm font-medium rounded-full mb-6">
-            Why Choose Us
-          </span>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-px bg-gold" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">
+              Advantage
+            </span>
+          </div>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
-            style={{ fontFamily: "var(--font-playfair)" }}
           >
             The Vertex Ridge <span className="text-gold">Advantage</span>
           </h2>
@@ -1225,14 +1232,17 @@ export function CorePrinciplesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-left mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-maroon/10 text-maroon text-sm font-medium rounded-full mb-6">
-            Our Foundation
-          </span>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-px bg-maroon" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">
+              Principles
+            </span>
+          </div>
           <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mb-6"
-            style={{ fontFamily: "var(--font-playfair)" }}
+
           >
             Core <span className="text-maroon">Principles</span>
           </h2>
