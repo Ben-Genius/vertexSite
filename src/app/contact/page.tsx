@@ -1,9 +1,12 @@
 import { ContactSection } from "@/components/sections";
+import { PageTransition } from "@/components/PageTransition";
 
 export default function ContactPage() {
   return (
-    <div className="pt-32 min-h-screen">
-      <ContactSection />
-    </div>
+    <PageTransition>
+      <div className="pt-32 min-h-screen">
+        <ContactSection />
+      </div>
+    </PageTransition>
   );
 }

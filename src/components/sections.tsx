@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView, animate } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -28,20 +28,58 @@ import { ChronicleButton } from "@/components/ui/chronicle-button";
 import { DicedHeroSection } from "@/components/ui/diced-hero-section";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 
-// Animation variants
+// ─── Shared easing ────────────────────────────────────────────────────────────
+const ease = [0.25, 0.1, 0.25, 1] as const;
+
+// ─── Reusable variants ────────────────────────────────────────────────────────
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
+  initial: { opacity: 0, y: 28 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.65, ease } },
 };
 
 const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
+  initial: {},
+  animate: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
 };
+
+const cardVariant = {
+  initial: { opacity: 0, y: 24, scale: 0.97 },
+  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease } },
+};
+
+// ─── CountUp — animates a numeric string like "15+", "98%" ───────────────────
+function CountUp({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const num = parseInt(value.replace(/\D/g, ""), 10);
+  const suffix = value.replace(/[0-9]/g, "");
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const ctrl = animate(0, num, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate: (v) => setCurrent(Math.round(v)),
+    });
+    return () => ctrl.stop();
+  }, [isInView, num]);
+
+  return <span ref={ref}>{current}{suffix}</span>;
+}
+
+// ─── AccentLine — animated horizontal rule (scaleX 0 → 1) ───────────────────
+function AccentLine({ color = "bg-maroon" }: { color?: string }) {
+  return (
+    <motion.div
+      className={`w-12 h-px ${color}`}
+      initial={{ scaleX: 0, originX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.55, ease }}
+    />
+  );
+}
 
 // Hero Section
 export function HeroSection() {
@@ -79,22 +117,26 @@ export function HeroSection() {
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          initial="hidden"
+          animate="show"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.2, delayChildren: 0.3 } } }}
         >
-          <h1
+          <motion.h1
+            variants={{ hidden: { opacity: 0, y: 40, filter: "blur(4px)" }, show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease } } }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-2"
           >
             Building Africa&apos;s <span className="text-maroon">Future</span>
-          </h1>
-          <div className="flex flex-col items-center justify-center gap-4">
+          </motion.h1>
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } }}
+            className="flex flex-col items-center justify-center gap-4 mt-4"
+          >
             <span className="text-2xl sm:text-3xl font-light text-white/80">Expertise in</span>
             <TypingEffect
               texts={['Civil Engineering', 'Building Construction', 'Oil & Gas Support', 'Project Management']}
               className="text-gold text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
             />
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
 
@@ -130,7 +172,7 @@ export function IntroSection() {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-maroon" />
+              <AccentLine />
               <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">Grounded</span>
             </div>
             <p className="text-lg sm:text-xl text-white/80 leading-relaxed  border-l-4 border-maroon pl-6">
@@ -167,57 +209,51 @@ export function IntroSection() {
           </motion.div>
         </div>
 
-        {/* Redesigned Stats Grid - Inspo Inspired */}
+        {/* Stats Grid */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="relative mt-24"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, margin: "-8%" }}
+          className="relative mt-24 grid grid-cols-1 md:grid-cols-4 border border-white/10 rounded-2xl overflow-hidden bg-white/[0.02] backdrop-blur-sm"
         >
-          <div className="grid grid-cols-1 md:grid-cols-4 border border-white/10 rounded-2xl overflow-hidden relative z-10 bg-white/[0.02] backdrop-blur-sm">
-            {[
-              { number: "15+", label: "Years in the business delivering excellence.", icon: Shield },
-              { number: "200+", label: "Successful projects across Ghana.", icon: Building2 },
-              { number: "50+", label: "Expert engineers and specialized staff.", icon: Users },
-              { number: "98%", label: "Client satisfaction and quality rating.", icon: Award },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="relative p-10 border-r border-b md:border-b-0 border-white/10 last:border-r-0 group hover:bg-white/[0.03] transition-all duration-500"
-              >
-                {/* Corner Pixels / Grid Accents - Inspo Inspired */}
-                <div className="absolute top-0 right-0 w-32 h-32 opacity-20 pointer-events-none overflow-hidden">
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:8px_8px]" />
-                  {/* Randomized 'solid' pixels */}
-                  <div className="absolute top-4 right-8 w-2 h-2 bg-white/20" />
-                  <div className="absolute top-12 right-4 w-2 h-2 bg-white/10" />
-                  <div className="absolute top-6 right-12 w-2 h-2 bg-white/30" />
-                </div>
-
-                {/* Folded Corner Decoration */}
-                <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-white/10 to-transparent flex items-center justify-center translate-x-1/2 -translate-y-1/2 rotate-45 group-hover:bg-white/20 transition-colors" />
-                <div className="absolute top-0 right-0 w-4 h-4 bg-white/10" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }} />
-
-                <div className="flex items-center gap-5 mb-6">
-                  {/* Icon Box with Inner Gradient */}
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-charcoal to-black border border-white/10 flex items-center justify-center shadow-[inset_0_2px_10px_rgba(255,255,255,0.05)] transition-transform duration-500 group-hover:scale-110">
-                    <stat.icon className="w-6 h-6 text-gold" />
-                  </div>
-
-                  {/* Number Value */}
-                  <div className="text-4xl lg:text-5xl font-bold text-white tracking-tight">
-                    {stat.number}
-                  </div>
-                </div>
-
-                {/* Description Label */}
-                <p className="text-sm text-white/50 leading-relaxed font-light max-w-[200px]">
-                  {stat.label}
-                </p>
+          {[
+            { number: "15+", label: "Years in the business delivering excellence.", icon: Shield },
+            { number: "200+", label: "Successful projects across Ghana.", icon: Building2 },
+            { number: "50+", label: "Expert engineers and specialized staff.", icon: Users },
+            { number: "98%", label: "Client satisfaction and quality rating.", icon: Award },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariant}
+              className="relative p-10 border-r border-b md:border-b-0 border-white/10 last:border-r-0 group hover:bg-white/[0.03] transition-colors duration-500"
+            >
+              {/* Corner pixel accent */}
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-20 pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:8px_8px]" />
+                <div className="absolute top-4 right-8 w-2 h-2 bg-white/20" />
+                <div className="absolute top-12 right-4 w-2 h-2 bg-white/10" />
+                <div className="absolute top-6 right-12 w-2 h-2 bg-white/30" />
               </div>
-            ))}
-          </div>
+              <div className="absolute top-0 right-0 w-4 h-4 bg-white/10" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }} />
+
+              <div className="flex items-center gap-5 mb-6">
+                <motion.div
+                  whileHover={{ scale: 1.12, rotate: 4 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="w-14 h-14 rounded-xl bg-gradient-to-br from-charcoal to-black border border-white/10 flex items-center justify-center shadow-[inset_0_2px_10px_rgba(255,255,255,0.05)]"
+                >
+                  <stat.icon className="w-6 h-6 text-gold" />
+                </motion.div>
+                <div className="text-4xl lg:text-5xl font-bold text-white tracking-tight">
+                  <CountUp value={stat.number} />
+                </div>
+              </div>
+              <p className="text-sm text-white/50 leading-relaxed font-light max-w-[200px]">
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -256,15 +292,23 @@ export function AboutSection() {
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.65, ease }}
           viewport={{ once: true }}
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-px bg-gold" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">About Us</span>
+            <AccentLine color="bg-gold" />
+            <motion.span
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2, ease }}
+              className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold"
+            >
+              About Us
+            </motion.span>
           </div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal leading-tight">
             Grounded in <span className="text-maroon">Ghana</span>,<br className="hidden sm:block" /> Driven by Excellence
@@ -316,34 +360,48 @@ export function AboutSection() {
 
         {/* Mission & Vision */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
           className="grid md:grid-cols-2 gap-6"
         >
-          <div className="p-8 bg-maroon rounded-xl text-white">
+          <motion.div
+            variants={cardVariant}
+            whileHover={{ y: -4, transition: { duration: 0.25 } }}
+            className="p-8 bg-maroon rounded-xl text-white cursor-default"
+          >
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+              <motion.div
+                whileHover={{ rotate: 10, scale: 1.1 }}
+                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center"
+              >
                 <Target className="w-5 h-5 text-gold" />
-              </div>
+              </motion.div>
               <h4 className="font-bold text-xl uppercase tracking-tight">Mission</h4>
             </div>
             <p className="text-white/80 leading-relaxed">
               To deliver construction and technical projects efficiently, transparently and safely — meeting local regulatory requirements, applying global standards, optimising public resources and handing over ready-for-use operational assets.
             </p>
-          </div>
-          <div className="p-8 bg-charcoal rounded-xl text-white">
+          </motion.div>
+          <motion.div
+            variants={cardVariant}
+            whileHover={{ y: -4, transition: { duration: 0.25 } }}
+            className="p-8 bg-charcoal rounded-xl text-white cursor-default"
+          >
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+              <motion.div
+                whileHover={{ rotate: 10, scale: 1.1 }}
+                className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center"
+              >
                 <Award className="w-5 h-5 text-gold" />
-              </div>
+              </motion.div>
               <h4 className="font-bold text-xl uppercase tracking-tight">Vision</h4>
             </div>
             <p className="text-white/80 leading-relaxed">
               To be Ghana&apos;s dependable partner for quality civil and building works that improve public services and community resilience.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -451,7 +509,7 @@ export function ServicesSection() {
             className="max-w-3xl"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-maroon" />
+              <AccentLine />
               <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">Services</span>
             </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal mb-6">
@@ -467,35 +525,50 @@ export function ServicesSection() {
       {/* Core Services Grid */}
       <div className="py-20">
         <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-px bg-charcoal/5 border border-charcoal/5 rounded-2xl overflow-hidden">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-px bg-charcoal/5 border border-charcoal/5 rounded-2xl overflow-hidden"
+          >
             {coreServices.map((service, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-10 group hover:bg-sand/30 transition-colors duration-300"
+                variants={cardVariant}
+                whileHover={{ backgroundColor: "rgba(245,240,230,0.5)", transition: { duration: 0.2 } }}
+                className="bg-white p-10 group"
               >
                 <div className="flex items-start justify-between mb-6">
-                  <div className="w-14 h-14 bg-maroon/5 rounded-xl flex items-center justify-center group-hover:bg-maroon group-hover:text-white transition-all duration-300">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="w-14 h-14 bg-maroon/5 rounded-xl flex items-center justify-center group-hover:bg-maroon transition-colors duration-300"
+                  >
                     <service.icon className="w-6 h-6 text-maroon group-hover:text-white transition-colors duration-300" />
-                  </div>
+                  </motion.div>
                   <span className="text-5xl font-bold text-charcoal/5 group-hover:text-maroon/10 transition-colors font-mono">{service.number}</span>
                 </div>
-                <h3 className="text-xl font-bold text-charcoal mb-3 group-hover:text-maroon transition-colors">{service.title}</h3>
+                <h3 className="text-xl font-bold text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300">{service.title}</h3>
                 <p className="text-charcoal/60 text-sm leading-relaxed mb-6">{service.description}</p>
-                <ul className="space-y-2">
+                <motion.ul
+                  variants={staggerContainer}
+                  className="space-y-2"
+                >
                   {service.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-charcoal/70">
+                    <motion.li
+                      key={i}
+                      variants={{ initial: { opacity: 0, x: -8 }, animate: { opacity: 1, x: 0, transition: { duration: 0.4, ease } } }}
+                      className="flex items-start gap-3 text-sm text-charcoal/70"
+                    >
                       <CheckCircle2 className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
                       <span>{item}</span>
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -510,7 +583,7 @@ export function ServicesSection() {
             className="mb-16"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-gold" />
+              <AccentLine color="bg-gold" />
               <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">Oil & Gas</span>
             </div>
             <div className="grid lg:grid-cols-2 gap-10 items-end">
@@ -607,7 +680,7 @@ export function OilGasSection() {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-gold" />
+              <AccentLine color="bg-gold" />
               <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">Energy</span>
             </div>
             <h2
@@ -622,40 +695,56 @@ export function OilGasSection() {
               bring expertise, safety, and reliability to every project.
             </p>
 
-            <div className="space-y-4">
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              className="space-y-3"
+            >
               {[
                 "Licensed by Ghana National Petroleum Corporation",
                 "ISO 9001:2015 Certified Operations",
                 "HSE Compliant Workforce",
                 "24/7 Emergency Response Capability",
               ].map((item, index) => (
-                <div key={index} className="flex items-center gap-3">
+                <motion.div
+                  key={index}
+                  variants={{ initial: { opacity: 0, x: -16 }, animate: { opacity: 1, x: 0, transition: { duration: 0.45, ease } } }}
+                  className="flex items-center gap-3"
+                >
                   <CheckCircle2 className="w-5 h-5 text-maroon flex-shrink-0" />
                   <span className="text-charcoal/70">{item}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Services Grid */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
             viewport={{ once: true }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {oilGasServices.map((service, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-sand p-5 rounded-md hover:bg-maroon/5 transition-colors group"
+                variants={cardVariant}
+                whileHover={{ y: -4, backgroundColor: "rgba(156,42,42,0.04)", transition: { duration: 0.2 } }}
+                className="bg-sand p-5 rounded-md group cursor-default"
               >
-                <service.icon className="w-8 h-8 text-gold mb-3" />
-                <h4 className="font-semibold text-charcoal mb-1">
-                  {service.title}
-                </h4>
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                  className="inline-block mb-3"
+                >
+                  <service.icon className="w-8 h-8 text-gold" />
+                </motion.div>
+                <h4 className="font-semibold text-charcoal mb-1">{service.title}</h4>
                 <p className="text-sm text-charcoal/60">{service.description}</p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
@@ -716,7 +805,7 @@ export function ProjectsSection() {
           className="text-left mb-16"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-px bg-maroon" />
+            <AccentLine />
             <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">
               Projects
             </span>
@@ -833,7 +922,7 @@ export function TeamSection() {
               viewport={{ once: true }}
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-maroon" />
+                <AccentLine />
                 <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">Our Team</span>
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold text-charcoal leading-tight mb-8">
@@ -848,9 +937,9 @@ export function TeamSection() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
               viewport={{ once: true }}
               className="space-y-4"
             >
@@ -860,15 +949,24 @@ export function TeamSection() {
                 { icon: Award, title: "Continuous Development", desc: "Leadership provides structure while continuous skills development ensures our workforce stays adaptable and technically sharp." },
                 { icon: Target, title: "Responsive & Accountable", desc: "The result is a team that is ready for the complexities of public-sector infrastructure — every time." },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-5 bg-white rounded-xl border border-charcoal/5 shadow-sm">
-                  <div className="w-10 h-10 bg-maroon/5 rounded-lg flex items-center justify-center flex-shrink-0">
+                <motion.div
+                  key={i}
+                  variants={cardVariant}
+                  whileHover={{ x: 6, transition: { duration: 0.2 } }}
+                  className="flex items-start gap-4 p-5 bg-white rounded-xl border border-charcoal/5 shadow-sm cursor-default"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.15, rotate: -6 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 20 }}
+                    className="w-10 h-10 bg-maroon/5 rounded-lg flex items-center justify-center flex-shrink-0"
+                  >
                     <item.icon className="w-5 h-5 text-maroon" />
-                  </div>
+                  </motion.div>
                   <div>
                     <h4 className="font-semibold text-charcoal mb-1">{item.title}</h4>
                     <p className="text-charcoal/60 text-sm leading-relaxed">{item.desc}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
@@ -886,7 +984,7 @@ export function TeamSection() {
             className="mb-16"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-gold" />
+              <AccentLine color="bg-gold" />
               <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">Methodology</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-white">
@@ -894,24 +992,38 @@ export function TeamSection() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            <div className="hidden lg:block absolute top-[28px] left-0 right-0 h-px bg-white/10 z-0" />
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative"
+          >
+            {/* Connector line — grows from left on scroll */}
+            <motion.div
+              className="hidden lg:block absolute top-[28px] left-0 right-0 h-px bg-white/20 z-0 origin-left"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease, delay: 0.2 }}
+            />
             {deliverySteps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                variants={cardVariant}
                 className="relative group z-10"
               >
-                <div className="w-14 h-14 rounded-full bg-charcoal border border-white/20 flex items-center justify-center text-white font-mono text-lg group-hover:bg-gold group-hover:border-gold group-hover:text-charcoal transition-all duration-400 mb-8 shadow-sm">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="w-14 h-14 rounded-full bg-charcoal border border-white/20 flex items-center justify-center text-white font-mono text-lg group-hover:bg-gold group-hover:border-gold group-hover:text-charcoal transition-all duration-300 mb-8 shadow-sm"
+                >
                   {step.number}
-                </div>
+                </motion.div>
                 <span className="text-gold/50 text-[10px] uppercase font-bold tracking-[0.4em] mb-3 block">
                   Phase {index + 1}
                 </span>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gold transition-colors duration-300">
                   {step.title}
                 </h3>
                 <p className="text-white/50 leading-relaxed text-sm">
@@ -919,7 +1031,7 @@ export function TeamSection() {
                 </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -935,7 +1047,7 @@ export function TeamSection() {
           >
             <div>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-white/40" />
+                <AccentLine color="bg-white/40" />
                 <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/60">For Our Clients</span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -999,7 +1111,7 @@ export function QHSESection() {
           >
             <div>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-px bg-maroon" />
+                <AccentLine />
                 <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">QHSE Policy</span>
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold text-charcoal leading-tight">
@@ -1014,33 +1126,47 @@ export function QHSESection() {
       </div>
 
       {/* Pillars Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-charcoal/5">
-        {pillars.map((pillar, index) => (
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-charcoal/5"
+      >
+        {pillars.map((pillar) => (
           <motion.div
             key={pillar.id}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="group border-r border-b border-charcoal/5 transition-all duration-500 hover:bg-sand/30"
+            variants={{
+              initial: { opacity: 0, y: 30 },
+              animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+            }}
+            className="group border-r border-b border-charcoal/5 transition-colors duration-500 hover:bg-sand/30"
           >
             <div className="relative h-64 md:h-72 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-              <img
+              <motion.img
                 src={pillar.image}
                 alt={pillar.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover"
+                initial={{ scale: 1.08 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, ease }}
+                whileHover={{ scale: 1.06 }}
               />
-              <div className="absolute inset-0 bg-maroon/5 group-hover:bg-transparent transition-colors" />
+              <div className="absolute inset-0 bg-maroon/5 group-hover:bg-transparent transition-colors duration-500" />
             </div>
 
             <div className="p-8">
               <div className="mb-6 flex items-start justify-between">
-                <div className="w-12 h-12 border border-maroon/20 flex items-center justify-center text-maroon group-hover:bg-maroon group-hover:text-white transition-all duration-500">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className="w-12 h-12 border border-maroon/20 flex items-center justify-center text-maroon group-hover:bg-maroon group-hover:text-white transition-all duration-400"
+                >
                   <pillar.icon className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-mono text-maroon opacity-20 group-hover:opacity-100 transition-opacity">{pillar.id}</span>
+                </motion.div>
+                <span className="text-xs font-mono text-maroon opacity-20 group-hover:opacity-100 transition-opacity duration-500">{pillar.id}</span>
               </div>
-              <h3 className="text-xl font-bold text-charcoal mb-4 group-hover:text-maroon transition-colors">
+              <h3 className="text-xl font-bold text-charcoal mb-4 group-hover:text-maroon transition-colors duration-300">
                 {pillar.title}
               </h3>
               <p className="text-charcoal/55 leading-relaxed text-sm">
@@ -1049,11 +1175,11 @@ export function QHSESection() {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Certification Row */}
-      <div className="py-10 border-t border-charcoal/5">
-        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="py-10 border-t border-charcoal/5 flex items-center justify-center ">
+        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-wrap items-center gap-x-12 gap-y-4 opacity-40 hover:opacity-100 transition-all duration-500">
             <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-maroon">ISO Certified</span>
             {["9001:2015", "14001:2018", "OHSAS 18001", "GHA Standard"].map(cert => (
@@ -1084,7 +1210,7 @@ export function ContactSection() {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-px bg-maroon" />
+              <AccentLine />
               <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">Connect</span>
             </div>
             <h2
@@ -1097,65 +1223,41 @@ export function ContactSection() {
               we can help bring your vision to life.
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-md bg-maroon/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-maroon" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-charcoal mb-1">Our Office</h4>
-                  <p className="text-charcoal/60">
-                    23 Royal Palm Avenue
-                    <br />
-                    West Legon - Accra, Ghana
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-md bg-maroon/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-maroon" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-charcoal mb-1">Phone</h4>
-                  <p className="text-charcoal/60">
-                    +233 024 891 5772
-                    <br />
-                    Vertex Ridge Ltd
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-md bg-maroon/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-maroon" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-charcoal mb-1">Email</h4>
-                  <p className="text-charcoal/60">
-                    info@vertexridge.com
-                    <br />
-                    projects@vertexridge.com
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-md bg-maroon/10 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6 text-maroon" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-charcoal mb-1">
-                    Working Hours
-                  </h4>
-                  <p className="text-charcoal/60">
-                    Monday - Friday: 8:00 AM - 5:00 PM
-                    <br />
-                    Saturday: 9:00 AM - 1:00 PM
-                  </p>
-                </div>
-              </div>
-            </div>
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              className="space-y-5"
+            >
+              {[
+                { icon: MapPin, label: "Our Office", lines: ["23 Royal Palm Avenue", "West Legon - Accra, Ghana"] },
+                { icon: Phone, label: "Phone", lines: ["+233 024 891 5772", "Vertex Ridge Ltd"] },
+                { icon: Mail, label: "Email", lines: ["info@vertexridge.com", "projects@vertexridge.com"] },
+                { icon: Clock, label: "Working Hours", lines: ["Monday – Friday: 8:00 AM – 5:00 PM", "Saturday: 9:00 AM – 1:00 PM"] },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={cardVariant}
+                  whileHover={{ x: 6, transition: { duration: 0.2 } }}
+                  className="flex items-start gap-4"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: -5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                    className="w-12 h-12 rounded-md bg-maroon/10 flex items-center justify-center flex-shrink-0"
+                  >
+                    <item.icon className="w-6 h-6 text-maroon" />
+                  </motion.div>
+                  <div>
+                    <h4 className="font-semibold text-charcoal mb-1">{item.label}</h4>
+                    <p className="text-charcoal/60">
+                      {item.lines[0]}<br />{item.lines[1]}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
@@ -1296,7 +1398,7 @@ export function WhyChooseUsSection() {
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-px bg-gold" />
+            <AccentLine color="bg-gold" />
             <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-gold">Why Choose Us</span>
           </div>
           <div className="grid lg:grid-cols-2 gap-10 items-end">
@@ -1309,24 +1411,32 @@ export function WhyChooseUsSection() {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {whyChooseUs.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group"
+              variants={cardVariant}
+              whileHover={{ y: -8, borderColor: "rgba(218,165,32,0.4)", transition: { duration: 0.25 } }}
+              className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm cursor-default"
             >
-              <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mb-6 group-hover:bg-gold/20 group-hover:scale-110 transition-all duration-300">
+              <motion.div
+                whileHover={{ scale: 1.15, rotate: 6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mb-6"
+              >
                 <item.icon className="w-7 h-7 text-gold" />
-              </div>
+              </motion.div>
               <h3 className="text-lg font-bold text-white mb-3">{item.title}</h3>
               <p className="text-white/55 leading-relaxed text-sm">{item.description}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -1368,7 +1478,7 @@ export function CorePrinciplesSection() {
           className="text-left mb-16"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-px bg-maroon" />
+            <AccentLine />
             <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-maroon">
               Principles
             </span>
@@ -1381,19 +1491,26 @@ export function CorePrinciplesSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {corePrinciples.map((principle, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="p-8 bg-white rounded-md shadow-sm border-t-4 border-gold h-full"
+              variants={cardVariant}
+              whileHover={{ y: -6, boxShadow: "0 12px 32px rgba(0,0,0,0.10)", transition: { duration: 0.25 } }}
+              className="p-8 bg-white rounded-md shadow-sm border-t-4 border-gold h-full cursor-default"
             >
-              <div className="text-4xl font-bold text-maroon/10 mb-4 font-mono">
+              <motion.div
+                className="text-4xl font-bold text-maroon/10 mb-4 font-mono"
+                whileHover={{ color: "rgba(156,42,42,0.25)" }}
+              >
                 {principle.number}
-              </div>
+              </motion.div>
               <h3 className="text-xl font-bold text-charcoal mb-4">
                 {principle.title}
               </h3>
@@ -1402,7 +1519,7 @@ export function CorePrinciplesSection() {
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
