@@ -280,7 +280,7 @@ export function AboutSection() {
               Every project we deliver is built to serve communities reliably and to stand up to long-term use. Through disciplined procurement, cost monitoring and practical value-for-money approaches, we work carefully with client budgets while maintaining durability and compliance.
             </p>
 
-            <div className="grid grid-cols-1 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="p-6 bg-sand/30 rounded-lg border border-maroon/10">
                 <div className="flex items-center gap-3 mb-3">
                   <Target className="w-6 h-6 text-maroon" />
@@ -318,7 +318,7 @@ export function AboutSection() {
               <img
                 src="/about-team.jpg"
                 alt="Vertex Ridge Team"
-                className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-[350px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                 <p className="text-white font-medium">Our expert team at work</p>
@@ -568,7 +568,7 @@ export function OilGasSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {oilGasServices.map((service, index) => (
               <div
@@ -674,7 +674,7 @@ export function ProjectsSection() {
             >
               <Card className="rounded-xl overflow-hidden border-none shadow-2xl bg-white h-full flex flex-col group/project">
                 {/* 90% Height Image Container */}
-                <div className="relative h-[580px] overflow-hidden">
+                <div className="relative h-[400px] md:h-[580px] overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -888,7 +888,7 @@ export function QHSESection() {
               className="group border-r border-b border-charcoal/5 transition-all duration-500 hover:bg-sand/30"
             >
               {/* Image Segment */}
-              <div className="relative h-78 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+              <div className="relative h-64 md:h-80 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
                 <img
                   src={pillar.image}
                   alt={pillar.title}
