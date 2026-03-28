@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   keywords: ["Vertex Ridge", "Construction Ghana", "Engineering Accra", "Civil Engineering", "Oil and Gas", "Infrastructure Africa", "Project Management"],
   authors: [{ name: "Vertex Ridge Limited" }],
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.png",
   },
   openGraph: {
     title: "Vertex Ridge Limited | Construction & Engineering Excellence",
