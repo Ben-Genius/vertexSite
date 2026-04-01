@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home1/vertexridgegh/public_html 
+    - export DEPLOYPATH=/home/vertexridgegh/public_html
     - yarn install
     - yarn build
     - /bin/cp -r .next/standalone/* $DEPLOYPATH
