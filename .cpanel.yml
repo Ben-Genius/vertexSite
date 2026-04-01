@@ -2,8 +2,8 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home1/vertexridgegh/public_html
-    - yarn install
-    - yarn build
-    - /bin/cp -r .next/standalone/* $DEPLOYPATH
-    - /bin/cp -r .next/static $DEPLOYPATH/.next/
-    - /bin/cp -r public $DEPLOYPATH
+    - npm install
+    - npm run build
+    - /bin/cp -r .next/standalone/. $DEPLOYPATH/
+    - /bin/cp -r public $DEPLOYPATH/public
+    - /bin/cp app.js $DEPLOYPATH/app.js
