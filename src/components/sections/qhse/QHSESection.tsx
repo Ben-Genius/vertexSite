@@ -111,7 +111,7 @@ export function QHSESection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease }}
                 className="group relative rounded-2xl overflow-hidden"
-                style={{ minHeight: "400px" }}
+                style={{ minHeight: "500px" }}
               >
                 <img
                   src={pillar.image}
@@ -120,7 +120,7 @@ export function QHSESection() {
                 />
                 <div className="absolute inset-0 bg-charcoal/65 group-hover:bg-charcoal/50 transition-colors duration-500" />
 
-                <div className="relative z-10 p-6 h-full flex flex-col min-h-[400px]">
+                <div className="relative z-10 p-7 h-full flex flex-col min-h-[500px]">
                   <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-auto">
                     <pillar.icon className="w-5 h-5 text-gold" />
                   </div>

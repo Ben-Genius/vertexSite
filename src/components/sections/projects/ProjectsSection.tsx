@@ -8,12 +8,12 @@ import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 const ease = [0.25, 0.1, 0.25, 1] as const;
 
 const allProjects = [
-  { title: "Tema Port Expansion", category: "Marine Construction", year: "2023", image: "/project-tema.jpg" },
-  { title: "Kumasi Road Network", category: "Road Construction", year: "2022", image: "/project-kumasi.jpg" },
-  { title: "Takoradi Gas Terminal", category: "Oil & Gas", year: "2023", image: "/project-takoradi.jpg" },
-  { title: "Accra Corporate Tower", category: "Commercial", year: "2021", image: "/project-accra.jpg" },
-  { title: "Tano Oil Field Support", category: "Oil & Gas", year: "2022", image: "/project-tano.png" },
-  { title: "Cape Coast Hospital", category: "Healthcare", year: "2023", image: "/project-cape-coast.png" },
+  { title: "Tema Port Expansion", category: "Marine Construction", year: "2023", image: "/img-port.jpg" },
+  { title: "Kumasi Road Network", category: "Road Construction", year: "2022", image: "/img-construction.jpg" },
+  { title: "Takoradi Gas Terminal", category: "Oil & Gas", year: "2023", image: "/img-oil-ship.jpg" },
+  { title: "Accra Corporate Tower", category: "Commercial", year: "2021", image: "/img-team-office.jpg" },
+  { title: "Tano Oil Field Support", category: "Oil & Gas", year: "2022", image: "/img-steel-pipes.jpg" },
+  { title: "Cape Coast Hospital", category: "Healthcare", year: "2023", image: "/img-oil-worker.jpg" },
 ];
 
 const categories = ["All", "Marine Construction", "Road Construction", "Oil & Gas", "Commercial", "Healthcare"];

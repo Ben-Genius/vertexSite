@@ -9,12 +9,12 @@ import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 const ease = [0.25, 0.1, 0.25, 1] as const;
 
 const projects = [
-  { title: "Tema Port Expansion", category: "Marine Construction", image: "/project-tema.jpg" },
-  { title: "Kumasi Road Network", category: "Road Construction", image: "/project-kumasi.jpg" },
-  { title: "Takoradi Gas Terminal", category: "Oil & Gas", image: "/project-takoradi.jpg" },
-  { title: "Accra Corporate Tower", category: "Commercial", image: "/project-accra.jpg" },
-  { title: "Tano Oil Field Support", category: "Oil & Gas", image: "/project-tano.png" },
-  { title: "Cape Coast Hospital", category: "Healthcare", image: "/project-cape-coast.png" },
+  { title: "Tema Port Expansion", category: "Marine Construction", image: "/img-port.jpg" },
+  { title: "Kumasi Road Network", category: "Road Construction", image: "/img-construction.jpg" },
+  { title: "Takoradi Gas Terminal", category: "Oil & Gas", image: "/img-oil-ship.jpg" },
+  { title: "Accra Corporate Tower", category: "Commercial", image: "/img-team-office.jpg" },
+  { title: "Tano Oil Field Support", category: "Oil & Gas", image: "/img-steel-pipes.jpg" },
+  { title: "Cape Coast Hospital", category: "Healthcare", image: "/img-oil-worker.jpg" },
 ];
 
 export function ExpertiseHighlight() {

@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, Users, Building2, Shield, Target, CheckCircle2, ArrowRight } from "lucide-react";
-import { SectionHeader } from "@/components/sections/shared/SectionHeader";
+import { Globe, Users, Building2, Shield, Target, CheckCircle2, ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 const ease = [0.25, 0.1, 0.25, 1] as const;
@@ -21,6 +20,7 @@ const credentialBadges = [
   "24/7 Response",
 ];
 
+// 6 services mapped to bento cards
 const oilGasServices = [
   { title: "Logistics & Supply Chain", desc: "Importation, transportation and re-exportation of offshore vessel equipment and project cargo.", icon: Globe },
   { title: "Manpower Provision", desc: "Provision of local manpower to provide routine support services for smooth offshore operations.", icon: Users },
@@ -30,23 +30,23 @@ const oilGasServices = [
   { title: "Inventory Management", desc: "Systematic inventory management ensuring traceability and reducing project downtime.", icon: Target },
 ];
 
+
 export function OilGasSection() {
   return (
     <section id="oil-gas" className="overflow-hidden">
-      {/* Cinematic Dark Hero */}
-      <div className="relative min-h-[90vh] flex flex-col justify-end">
+      {/* Cinematic Hero */}
+      <div className="relative min-h-[85vh] flex flex-col justify-end">
         <div className="absolute inset-0 z-0">
           <img
-            src="/project-takoradi.jpg"
+            src="/img-oil-ship.jpg"
             alt="Oil & Gas Operations"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-charcoal/75" />
-          <div className="absolute inset-0 overlay-maroon-accent" />
+          <div className="absolute inset-0 bg-charcoal/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 to-transparent" />
         </div>
 
         <div className="relative z-10 container-vr pb-20">
-          {/* Credential badges */}
           <div className="flex flex-wrap gap-2 mb-10">
             {credentialBadges.map((badge, i) => (
               <motion.span
@@ -65,15 +65,16 @@ export function OilGasSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
+            className="max-w-2xl"
           >
             <div className="flex items-center gap-4 mb-5">
               <div className="w-10 h-px bg-gold" />
               <span className="label-caps text-gold">Oil & Gas Division</span>
             </div>
-            <h1 className="text-[clamp(2.5rem,7vw,5rem)] font-bold text-white leading-tight mb-6 max-w-3xl">
+            <h1 className="text-[clamp(2.5rem,7vw,5rem)] font-bold text-white leading-tight mb-6">
               Specialized <span className="text-gold">Energy Solutions</span>
             </h1>
-            <p className="text-white/65 text-lg leading-relaxed max-w-2xl mb-8">
+            <p className="text-white/65 text-lg leading-relaxed mb-8">
               Vertex Ridge extends its core engineering and logistics strength into Ghana's upstream and midstream energy sector, supporting operators and contractors across offshore and onshore operations.
             </p>
             <Link
@@ -86,75 +87,129 @@ export function OilGasSection() {
         </div>
       </div>
 
-      {/* Credentials + Services */}
-      <div className="bg-sand py-24">
+      {/* Credentials Strip */}
+      <div className="bg-charcoal border-b border-white/8 py-8">
         <div className="container-vr">
-          <div className="grid lg:grid-cols-2 gap-16 mb-20">
+          <ul className="flex flex-wrap gap-x-10 gap-y-3">
+            {credentials.map((item, i) => (
+              <li key={i} className="flex items-center gap-2.5 text-white/60 text-sm">
+                <CheckCircle2 className="w-4 h-4 text-gold flex-shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* ICOMAT Bento Card Grid */}
+      <div className="bg-white py-20">
+        <div className="container-vr">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease }}
+            className="mb-10"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-8 h-px bg-maroon" />
+              <span className="label-caps text-maroon text-[10px]">Offshore Services</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-charcoal">
+              What We <span className="text-maroon">Provide</span>
+            </h2>
+          </motion.div>
+
+          {/* Bento grid — 3 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-[220px]">
+
+            {/* Intro dark card — spans 1 col, 2 rows */}
             <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease }}
+              transition={{ duration: 0.5, ease }}
+              className="lg:row-span-2 rounded-2xl bg-charcoal p-8 flex flex-col justify-between"
             >
-              <SectionHeader
-                label="Energy"
-                title={<>Our <span className="text-gold">Credentials</span></>}
-              />
-              <ul className="space-y-4">
-                {credentials.map((item, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.1, ease }}
-                    className="flex items-center gap-3 text-charcoal/75"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-maroon flex-shrink-0" />
-                    <span className="font-medium">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-6">
+                  <Globe className="w-5 h-5 text-gold" />
+                </div>
+                <h3 className="text-2xl font-bold text-white leading-snug mb-3">
+                  Our Energy<br />Services
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  End-to-end offshore support — from logistics and manpower to regulatory compliance and inventory.
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 text-gold text-sm font-semibold hover:gap-3 transition-all duration-200"
+              >
+                Get in Touch <ArrowUpRight size={14} />
+              </Link>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease }}
-              className="relative"
-            >
-              <img
-                src="/service-oil-gas.png"
-                alt="Oil & Gas Services"
-                className="w-full h-64 sm:h-80 object-cover rounded-2xl shadow-xl"
-              />
-            </motion.div>
-          </div>
-
-          {/* Service Cards */}
-          <SectionHeader
-            label="Offshore Services"
-            title={<>What We <span className="text-maroon">Provide</span></>}
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {oilGasServices.map((service, i) => (
+            {/* Service cards — light */}
+            {oilGasServices.slice(0, 4).map((service, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.08, ease }}
-                whileHover={{ y: -4 }}
-                className="p-6 bg-white rounded-xl border border-t-4 border-t-gold border-charcoal/6 hover:shadow-lg transition-all duration-300 group"
+                transition={{ duration: 0.5, delay: (i + 1) * 0.07, ease }}
+                className="rounded-2xl bg-[#f2f2f0] p-7 flex flex-col justify-between group hover:bg-[#ebebea] transition-colors duration-300"
               >
-                <div className="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
-                  <service.icon className="w-5 h-5 text-gold" />
+                <div className="w-9 h-9 flex items-center justify-center">
+                  <service.icon
+                    className="w-7 h-7 text-charcoal/30"
+                    strokeWidth={1}
+                    strokeDasharray="4 2"
+                  />
                 </div>
-                <h4 className="font-bold text-charcoal mb-2">{service.title}</h4>
-                <p className="text-charcoal/55 text-sm leading-relaxed">{service.desc}</p>
+                <div>
+                  <h4 className="font-bold text-charcoal text-[15px] mb-1 leading-snug">{service.title}</h4>
+                  <p className="text-charcoal/50 text-sm leading-relaxed">{service.desc}</p>
+                </div>
               </motion.div>
             ))}
+
+            {/* Dark accent card */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.42, ease }}
+              className="rounded-2xl bg-maroon p-7 flex flex-col justify-between"
+            >
+              <div className="w-9 h-9 flex items-center justify-center">
+                <Shield className="w-7 h-7 text-white/40" strokeWidth={1} />
+              </div>
+              <div>
+                <h4 className="font-bold text-white text-[15px] mb-1 leading-snug">GNPC Licensed<br />& ISO Certified</h4>
+                <p className="text-white/55 text-sm leading-relaxed">
+                  Fully compliant with Ghana's upstream energy regulations.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Last service card */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.49, ease }}
+              className="rounded-2xl bg-[#f2f2f0] p-7 flex flex-col justify-between group hover:bg-[#ebebea] transition-colors duration-300"
+            >
+              <div className="w-9 h-9 flex items-center justify-center">
+                <Target className="w-7 h-7 text-charcoal/30" strokeWidth={1} strokeDasharray="4 2" />
+              </div>
+              <div>
+                <h4 className="font-bold text-charcoal text-[15px] mb-1 leading-snug">{oilGasServices[5].title}</h4>
+                <p className="text-charcoal/50 text-sm leading-relaxed">{oilGasServices[5].desc}</p>
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ const pillars = [
 export function QHSEPreview() {
   return (
     <section className="py-24 bg-navy overflow-hidden">
-      <div className="container-vr">
+      <div className="w-full max-w-[1600px] mx-auto px-5 lg:px-10">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <motion.div
@@ -71,8 +71,8 @@ export function QHSEPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1, ease }}
-              className="group relative rounded-xl overflow-hidden"
-              style={{ minHeight: "320px" }}
+              className="group relative rounded-2xl overflow-hidden"
+              style={{ minHeight: "460px" }}
             >
               {/* Image */}
               <img
@@ -83,15 +83,15 @@ export function QHSEPreview() {
               <div className="absolute inset-0 bg-navy/70 group-hover:bg-navy/50 transition-colors duration-500" />
 
               {/* Content */}
-              <div className="relative z-10 p-6 h-full flex flex-col justify-end min-h-[320px]">
-                <span className="text-4xl font-bold text-white/15 mb-auto block">{pillar.number}</span>
+              <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[460px]">
+                <span className="text-5xl font-bold text-white/15 mb-auto block">{pillar.number}</span>
                 <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <ShieldCheck size={14} className="text-gold" />
-                    <span className="label-caps text-gold text-[10px]">QHSE</span>
+                  <div className="flex items-center gap-2 mb-4">
+                    <ShieldCheck size={16} className="text-gold" />
+                    <span className="label-caps text-gold text-xs">QHSE</span>
                   </div>
-                  <h4 className="font-bold text-white text-lg mb-2">{pillar.title}</h4>
-                  <p className="text-white/60 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-400 max-h-0 group-hover:max-h-24 overflow-hidden">
+                  <h4 className="font-bold text-white text-xl mb-3">{pillar.title}</h4>
+                  <p className="text-white/70 text-base leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-h-0 group-hover:max-h-32 overflow-hidden">
                     {pillar.desc}
                   </p>
                 </div>

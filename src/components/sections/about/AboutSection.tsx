@@ -108,7 +108,7 @@ export function AboutSection() {
             >
               <div className="relative group overflow-hidden rounded-2xl shadow-2xl">
                 <img
-                  src="/about-team.jpg"
+                  src="/img-person-5.jpg"
                   alt="Vertex Ridge Team"
                   className="w-full h-[350px] md:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -122,44 +122,61 @@ export function AboutSection() {
             </motion.div>
           </div>
 
-          {/* Mission & Vision */}
-          <div className="grid md:grid-cols-2 gap-5 mb-24">
+          {/* Mission & Vision — ICOMAT bento style */}
+          <div className="grid md:grid-cols-3 gap-3 mb-24 auto-rows-[200px]">
+            {/* Dark intro card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease }}
-              whileHover={{ y: -4 }}
-              className="p-8 bg-maroon rounded-2xl text-white"
+              className="rounded-2xl bg-charcoal p-8 flex flex-col justify-between"
             >
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
-                  <Target className="w-5 h-5 text-gold" />
-                </div>
-                <h4 className="font-bold text-xl uppercase tracking-tight">Mission</h4>
+              <div className="w-9 h-9 flex items-center justify-center">
+                <Target className="w-7 h-7 text-white/25" strokeWidth={1} />
               </div>
-              <p className="text-white/80 leading-relaxed">
-                To deliver construction and technical projects efficiently, transparently and safely — meeting local regulatory requirements, applying global standards, optimising public resources and handing over ready-for-use operational assets.
-              </p>
+              <div>
+                <p className="label-caps text-white/35 text-[10px] mb-2">Our Purpose</p>
+                <h4 className="text-lg font-bold text-white leading-snug">What Drives<br />Everything We Do</h4>
+              </div>
             </motion.div>
 
+            {/* Mission — light */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1, ease }}
-              whileHover={{ y: -4 }}
-              className="p-8 bg-charcoal rounded-2xl text-white"
+              transition={{ duration: 0.5, delay: 0.08, ease }}
+              className="rounded-2xl bg-[#f2f2f0] p-8 flex flex-col justify-between"
             >
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
-                  <Award className="w-5 h-5 text-gold" />
-                </div>
-                <h4 className="font-bold text-xl uppercase tracking-tight">Vision</h4>
+              <div className="w-9 h-9 flex items-center justify-center">
+                <Target className="w-7 h-7 text-charcoal/25" strokeWidth={1} strokeDasharray="4 2" />
               </div>
-              <p className="text-white/80 leading-relaxed">
-                To be Ghana's dependable partner for quality civil and building works that improve public services and community resilience.
-              </p>
+              <div>
+                <p className="label-caps text-charcoal/40 text-[10px] mb-2">Mission</p>
+                <p className="text-charcoal/70 text-sm leading-relaxed">
+                  Deliver construction and technical projects efficiently, transparently and safely — applying global standards, optimising public resources.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Vision — maroon */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.16, ease }}
+              className="rounded-2xl bg-maroon p-8 flex flex-col justify-between"
+            >
+              <div className="w-9 h-9 flex items-center justify-center">
+                <Award className="w-7 h-7 text-white/30" strokeWidth={1} />
+              </div>
+              <div>
+                <p className="label-caps text-white/45 text-[10px] mb-2">Vision</p>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  To be Ghana's dependable partner for quality civil and building works that improve public services and community resilience.
+                </p>
+              </div>
             </motion.div>
           </div>
 

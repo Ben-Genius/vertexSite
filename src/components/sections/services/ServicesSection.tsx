@@ -13,7 +13,7 @@ const coreServices = [
     icon: Zap,
     title: "Engineering & Technical Design",
     description: "From early assessments to detailed design, we provide the technical foundation for compliant, buildable projects.",
-    image: "/service-civil.png",
+    image: "/img-team-office.jpg",
     items: [
       "Site assessments, topographic surveys and geotechnical input",
       "Structural and architectural support",
@@ -26,7 +26,7 @@ const coreServices = [
     icon: HardHat,
     title: "Construction & Civil Works",
     description: "We execute building and civil works with disciplined supervision, quality controls and safe working practices.",
-    image: "/service-construction.png",
+    image: "/img-construction.jpg",
     items: [
       "Public and institutional buildings",
       "Concrete, formwork, reinforcement, masonry and finishing works",
@@ -39,7 +39,7 @@ const coreServices = [
     icon: Target,
     title: "Procurement & Project Support",
     description: "Responsible sourcing, rigorous inspection and transparent reporting to protect client budgets and timelines.",
-    image: "/service-pm.png",
+    image: "/img-steel-pipes.jpg",
     items: [
       "Vendor pre-qualification, competitive sourcing & testing",
       "Quality assurance and documented inspection regimes",
@@ -52,7 +52,7 @@ const coreServices = [
     icon: CheckCircle2,
     title: "Commissioning & Handover",
     description: "Structured close-out to ensure every facility is fully tested, documented and ready for immediate operations.",
-    image: "/service-oil-gas.png",
+    image: "/img-oil-ship.jpg",
     items: [
       "Final inspections, punch-list completion and operational testing",
       "As-built documentation, maintenance manuals and training for facility operators",

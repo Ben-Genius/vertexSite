@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, ShieldCheck, Award, ArrowRight, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, ShieldCheck, Award, Send } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import logo from "@/assets/images/logo.png";
@@ -44,33 +44,6 @@ export function Footer() {
 
   return (
     <footer className="bg-charcoal text-white overflow-hidden">
-      {/* Pre-footer CTA Band */}
-      <div className="bg-maroon py-16 px-6">
-        <div className="container-vr flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div>
-            <p className="label-caps text-white/60 mb-3">Start Your Next Project</p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Ready to Build?
-            </h2>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-maroon font-bold rounded-full hover:bg-gold hover:text-white transition-all duration-300 text-sm"
-            >
-              Start Your Project
-              <ArrowRight size={16} />
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-3 px-8 py-4 border border-white/30 text-white font-bold rounded-full hover:border-white hover:bg-white/10 transition-all duration-300 text-sm"
-            >
-              View Services
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer */}
       <div className="container-vr py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
