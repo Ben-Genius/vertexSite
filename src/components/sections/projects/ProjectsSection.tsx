@@ -35,12 +35,12 @@ export function ProjectsSection() {
         />
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap gap-2 mb-12 overflow-x-auto pb-1">
+        <div className="flex flex-nowrap sm:flex-wrap gap-2 mb-12 overflow-x-auto pb-3 snap-x scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${
+              className={`px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-300 whitespace-nowrap snap-start shrink-0 ${
                 activeCategory === cat
                   ? "bg-maroon text-white shadow-[0_0_20px_rgba(133,30,30,0.3)]"
                   : "bg-white border border-charcoal/10 text-charcoal/60 hover:border-maroon/30 hover:text-charcoal"
@@ -73,14 +73,13 @@ export function ProjectsSection() {
                   i === 0 || i === 3 ? "md:row-span-2" : ""
                 }`}
                 style={{
-                  minHeight: i === 0 || i === 3 ? "600px" : "320px",
+                  minHeight: i === 0 || i === 3 ? "clamp(380px, 60vh, 600px)" : "clamp(280px, 35vh, 320px)",
                 }}
-                whileHover={{ scale: 1.01 }}
               >
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   style={{ transition: "transform 700ms ease" }}
                 />
                 <div className="absolute inset-0 overlay-dark-bottom" />
@@ -96,11 +95,11 @@ export function ProjectsSection() {
                     <div className="w-6 h-px bg-gold" />
                     <span className="label-caps text-gold text-[10px]">{project.category}</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight group-hover:text-gold transition-colors duration-300 mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight group-hover:text-gold transform group-hover:translate-x-1 transition-all duration-300 mb-4">
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-white/60 text-xs font-semibold opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                    View Project <ArrowRight size={12} />
+                  <div className="flex items-center gap-2 text-white/80 text-xs font-semibold opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                    View Project <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </motion.div>

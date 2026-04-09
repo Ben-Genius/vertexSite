@@ -124,12 +124,12 @@ export function TeamSection() {
                   transition={{ duration: 0.4, delay: i * 0.1, ease }}
                   className="flex items-start gap-4 p-5 bg-white/5 border border-white/8 rounded-xl hover:border-gold/20 hover:bg-white/8 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 bg-maroon/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-maroon transition-colors duration-300">
+                  <div className="w-10 h-10 bg-maroon/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-maroon transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 origin-left">
                     <item.icon className="w-5 h-5 text-gold group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-white mb-1">{item.title}</h4>
-                    <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+                  <div className="transform group-hover:translate-x-1 transition-transform duration-300">
+                    <h4 className="font-semibold text-white mb-1 group-hover:text-gold transition-colors duration-300">{item.title}</h4>
+                    <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-300">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}

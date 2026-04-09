@@ -120,7 +120,7 @@ export function ServicesSection() {
                 />
                 <div className="absolute inset-0 overlay-dark-full opacity-30" />
                 {/* Large ghost number */}
-                <div className="absolute bottom-6 right-6 text-[8rem] font-bold text-white/10 leading-none select-none">
+                <div className="absolute bottom-6 right-6 text-[clamp(5rem,15vw,8rem)] font-bold text-white/10 leading-none select-none">
                   {service.number}
                 </div>
               </div>
@@ -192,14 +192,15 @@ export function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08, ease }}
-                whileHover={{ y: -4 }}
-                className="p-6 border border-white/10 rounded-xl hover:border-gold/40 hover:bg-white/5 transition-all duration-300 group"
+                className="p-6 border border-white/10 rounded-xl hover:border-gold/40 hover:bg-white/5 transition-all duration-500 group"
               >
-                <div className="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
-                  <service.icon className="w-5 h-5 text-gold" />
+                <div className="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center mb-4 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 origin-left">
+                  <service.icon className="w-5 h-5 text-gold group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h4 className="font-semibold text-white mb-2">{service.title}</h4>
-                <p className="text-white/50 text-sm leading-relaxed">{service.desc}</p>
+                <div className="transform group-hover:translate-x-1 transition-transform duration-300">
+                  <h4 className="font-semibold text-white mb-2 group-hover:text-gold transition-colors duration-300">{service.title}</h4>
+                  <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-300">{service.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>

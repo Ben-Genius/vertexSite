@@ -104,7 +104,7 @@ export function HorizontalScroll() {
   return (
     <div ref={sectionRef} className="relative overflow-hidden bg-white" style={{ height: "88vh" }}>
       {/* Header — sits at the very top */}
-      <div className="absolute top-0 left-0 right-0 z-20 container-vr pt-16 pb-0 flex items-center justify-between">
+      <div className="absolute top-0 left-0 right-0 z-20 container-vr pt-24 sm:pt-16 pb-0 flex items-center justify-between">
         <div>
           <div className="flex items-center gap-4 mb-2">
             <div className="w-8 h-px bg-maroon" />
@@ -136,8 +136,8 @@ export function HorizontalScroll() {
         {steps.map((step, i) => (
           <div
             key={i}
-            className="hs-card flex-shrink-0 flex flex-col pt-36 pb-10 mr-5 last:mr-0"
-            style={{ width: "clamp(300px, 36vw, 500px)" }}
+            className="hs-card flex-shrink-0 flex flex-col pt-44 sm:pt-36 pb-10 mr-5 last:mr-0"
+            style={{ width: "clamp(280px, 75vw, 500px)" }}
           >
             {/* Step header */}
             <div className="flex items-center gap-3 mb-3 px-1">

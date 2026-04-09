@@ -51,23 +51,24 @@ export function CorePrinciplesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
-              whileHover={{ y: -6 }}
               className={`relative p-7 rounded-2xl overflow-hidden group cursor-default transition-all duration-300 ${
                 i % 2 === 0 ? "bg-white" : "bg-sand/80"
-              } border border-charcoal/6 hover:border-maroon/20 hover:shadow-lg`}
+              } border border-charcoal/6 hover:border-maroon/20 hover:shadow-lg hover:shadow-maroon/5`}
             >
               {/* Ghost number */}
-              <span className="absolute top-4 right-5 text-7xl font-bold text-charcoal/5 leading-none select-none">
+              <span className="absolute top-4 right-5 text-7xl font-bold text-charcoal/5 leading-none select-none transform group-hover:scale-110 group-hover:-translate-x-2 transition-all duration-500">
                 {p.number}
               </span>
 
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-maroon/8 flex items-center justify-center mb-6 group-hover:bg-maroon transition-colors duration-300">
+              <div className="w-12 h-12 rounded-xl bg-maroon/8 flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500 origin-left">
                 <p.icon className="w-6 h-6 text-maroon group-hover:text-white transition-colors duration-300" />
               </div>
 
-              <h4 className="font-bold text-lg text-charcoal mb-3">{p.title}</h4>
-              <p className="text-charcoal/60 text-sm leading-relaxed">{p.desc}</p>
+              <div className="transform group-hover:translate-x-1 transition-transform duration-300">
+                <h4 className="font-bold text-lg text-charcoal mb-3 group-hover:text-maroon transition-colors duration-300">{p.title}</h4>
+                <p className="text-charcoal/60 text-sm leading-relaxed group-hover:text-charcoal/80 transition-colors duration-300">{p.desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>

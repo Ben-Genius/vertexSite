@@ -130,14 +130,14 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease }}
-              className="rounded-2xl bg-charcoal p-8 flex flex-col justify-between"
+              className="rounded-2xl bg-charcoal p-8 flex flex-col justify-between group transition-all duration-300"
             >
-              <div className="w-9 h-9 flex items-center justify-center">
-                <Target className="w-7 h-7 text-white/25" strokeWidth={1} />
+              <div className="w-9 h-9 flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 origin-bottom-left">
+                <Target className="w-7 h-7 text-white/25 group-hover:text-gold transition-colors duration-300" strokeWidth={1} />
               </div>
-              <div>
+              <div className="transform group-hover:translate-x-1 transition-transform duration-300">
                 <p className="label-caps text-white/35 text-[10px] mb-2">Our Purpose</p>
-                <h4 className="text-lg font-bold text-white leading-snug">What Drives<br />Everything We Do</h4>
+                <h4 className="text-lg font-bold text-white leading-snug group-hover:text-gold transition-colors duration-300">What Drives<br />Everything We Do</h4>
               </div>
             </motion.div>
 
@@ -147,14 +147,14 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.08, ease }}
-              className="rounded-2xl bg-[#f2f2f0] p-8 flex flex-col justify-between"
+              className="rounded-2xl bg-[#f2f2f0] p-8 flex flex-col justify-between group hover:bg-[#fafaf9] transition-colors duration-300"
             >
-              <div className="w-9 h-9 flex items-center justify-center">
-                <Target className="w-7 h-7 text-charcoal/25" strokeWidth={1} strokeDasharray="4 2" />
+              <div className="w-9 h-9 flex items-center justify-center transform group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 origin-left">
+                <Target className="w-7 h-7 text-charcoal/25 group-hover:text-maroon transition-colors duration-300" strokeWidth={1} strokeDasharray="4 2" />
               </div>
-              <div>
+              <div className="transform group-hover:translate-x-1 transition-transform duration-300">
                 <p className="label-caps text-charcoal/40 text-[10px] mb-2">Mission</p>
-                <p className="text-charcoal/70 text-sm leading-relaxed">
+                <p className="text-charcoal/70 text-sm leading-relaxed group-hover:text-charcoal transition-colors duration-300">
                   Deliver construction and technical projects efficiently, transparently and safely — applying global standards, optimising public resources.
                 </p>
               </div>
@@ -166,14 +166,14 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.16, ease }}
-              className="rounded-2xl bg-maroon p-8 flex flex-col justify-between"
+              className="rounded-2xl bg-maroon p-8 flex flex-col justify-between group transition-all duration-300"
             >
-              <div className="w-9 h-9 flex items-center justify-center">
-                <Award className="w-7 h-7 text-white/30" strokeWidth={1} />
+              <div className="w-9 h-9 flex items-center justify-center transform group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 origin-left">
+                <Award className="w-7 h-7 text-white/30 group-hover:text-gold transition-colors duration-300" strokeWidth={1} />
               </div>
-              <div>
+              <div className="transform group-hover:translate-x-1 transition-transform duration-300">
                 <p className="label-caps text-white/45 text-[10px] mb-2">Vision</p>
-                <p className="text-white/80 text-sm leading-relaxed">
+                <p className="text-white/80 text-sm leading-relaxed group-hover:text-white transition-colors duration-300">
                   To be Ghana's dependable partner for quality civil and building works that improve public services and community resilience.
                 </p>
               </div>

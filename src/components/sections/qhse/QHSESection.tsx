@@ -121,12 +121,12 @@ export function QHSESection() {
                 <div className="absolute inset-0 bg-charcoal/65 group-hover:bg-charcoal/50 transition-colors duration-500" />
 
                 <div className="relative z-10 p-7 h-full flex flex-col min-h-[500px]">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-auto">
-                    <pillar.icon className="w-5 h-5 text-gold" />
+                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-auto transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 origin-left">
+                    <pillar.icon className="w-5 h-5 text-gold group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <div>
-                    <span className="text-5xl font-bold text-white/10 block mb-3">{pillar.number}</span>
-                    <h4 className="font-bold text-white text-lg mb-2">{pillar.title}</h4>
+                  <div className="transform group-hover:translate-x-1 transition-transform duration-300">
+                    <span className="text-5xl font-bold text-white/10 block mb-3 group-hover:text-gold/20 transition-colors duration-300">{pillar.number}</span>
+                    <h4 className="font-bold text-white text-lg mb-2 group-hover:text-gold transition-colors duration-300">{pillar.title}</h4>
                     <p className="text-white/0 group-hover:text-white/65 text-sm leading-relaxed transition-all duration-400">
                       {pillar.desc}
                     </p>

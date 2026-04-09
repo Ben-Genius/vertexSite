@@ -68,7 +68,10 @@ export function Navbar() {
         transition={{ duration: 0.7, ease }}
         className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
       >
-        <div className="container mx-auto py-4 flex items-center justify-between">
+        {/* Mobile Scrolled Background */}
+        <div className={`absolute inset-0 bg-charcoal/95 backdrop-blur-md transition-opacity duration-300 pointer-events-auto lg:hidden ${isScrolled ? "opacity-100 shadow-xl border-b border-white/5" : "opacity-0"}`} />
+
+        <div className="relative z-10 container mx-auto py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="pointer-events-auto">
             <Logo isScrolled={isScrolled} />
