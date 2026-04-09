@@ -1,10 +1,10 @@
-import { OilGasSection } from "@/components/sections";
+import { OilGasSection } from "@/components/sections/oil-gas/OilGasSection";
 import { PageTransition } from "@/components/PageTransition";
 
 export default function OilGasPage() {
   return (
     <PageTransition>
-      <div className="pt-32 min-h-screen">
+      <div className="min-h-screen">
         <OilGasSection />
       </div>
     </PageTransition>

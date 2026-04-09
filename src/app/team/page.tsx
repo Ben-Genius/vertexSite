@@ -1,10 +1,10 @@
-import { TeamSection } from "@/components/sections";
+import { TeamSection } from "@/components/sections/team/TeamSection";
 import { PageTransition } from "@/components/PageTransition";
 
 export default function TeamPage() {
   return (
     <PageTransition>
-      <div className="pt-32 min-h-screen">
+      <div className="min-h-screen">
         <TeamSection />
       </div>
     </PageTransition>
