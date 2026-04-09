@@ -40,7 +40,7 @@ export function IntroSection() {
   const next = () => setActive((a) => (a + 1) % cards.length);
 
   return (
-    <section className="bg-white border-b border-charcoal/6">
+    <section className="bg-white border-b border-charcoal/6 px-2">
       <div className="container-vr py-16 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -158,9 +158,8 @@ export function IntroSection() {
                     aria-label={`Card ${i + 1}`}
                   >
                     <div
-                      className={`h-1 rounded-full transition-all duration-300 ${
-                        i === active ? "w-5 bg-maroon" : "w-1.5 bg-charcoal/20"
-                      }`}
+                      className={`h-1 rounded-full transition-all duration-300 ${i === active ? "w-5 bg-maroon" : "w-1.5 bg-charcoal/20"
+                        }`}
                     />
                   </button>
                 ))}
