@@ -16,9 +16,10 @@ export default function Home() {
       <HorizontalScroll />
       <BentoSection />
       <CapsuleSection />
+      <QHSEPreview />
+
       <ExpertiseHighlight />
       <WhyChooseUsSection />
-      <QHSEPreview />
       <CTASection />
     </div>
   );
