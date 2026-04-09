@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { LenisProvider } from "@/components/providers/LenisProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -11,9 +12,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -48,18 +50,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased bg-sand text-charcoal min-h-screen relative overflow-x-hidden`}
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-sand text-charcoal min-h-screen relative overflow-x-hidden`}
       >
-        <div className="relative z-10 flex flex-col min-h-screen">
-          <Navbar />
-          <main className="w-full">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <LenisProvider>
+          <div className="relative z-10 flex flex-col min-h-screen">
+            <Navbar />
+            <main className="w-full">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </LenisProvider>
         <Toaster />
       </body>
     </html>
   );
 }
-

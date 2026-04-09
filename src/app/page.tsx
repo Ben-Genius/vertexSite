@@ -1,33 +1,25 @@
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import { HeroSection } from "@/components/sections";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
-
-// Dynamic imports for optimization
-const IntroSection = dynamic(() => import("@/components/sections").then(m => m.IntroSection));
-const ExpertiseHighlight = dynamic(() => import("@/components/sections").then(m => m.ExpertiseHighlight));
-const WhyChooseUsSection = dynamic(() => import("@/components/sections").then(m => m.WhyChooseUsSection));
-const QHSESection = dynamic(() => import("@/components/sections").then(m => m.QHSESection));
+import { HeroSection } from "@/components/sections/home/HeroSection";
+import { IntroSection } from "@/components/sections/home/IntroSection";
+import { HorizontalScroll } from "@/components/sections/home/HorizontalScroll";
+import { BentoSection } from "@/components/sections/home/BentoSection";
+import { CapsuleSection } from "@/components/sections/home/CapsuleSection";
+import { ExpertiseHighlight } from "@/components/sections/home/ExpertiseHighlight";
+import { WhyChooseUsSection } from "@/components/sections/home/WhyChooseUsSection";
+import { QHSEPreview } from "@/components/sections/home/QHSEPreview";
+import { CTASection } from "@/components/sections/home/CTASection";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       <HeroSection />
-
-      <Suspense fallback={<SectionFallback />}>
-        <IntroSection />
-        <ExpertiseHighlight />
-        <WhyChooseUsSection />
-        <QHSESection />
-      </Suspense>
-    </div>
-  );
-}
-
-function SectionFallback() {
-  return (
-    <div className="w-full h-[50vh] flex items-center justify-center bg-sand/20">
-      <LoadingSpinner />
+      <IntroSection />
+      <HorizontalScroll />
+      <BentoSection />
+      <CapsuleSection />
+      <ExpertiseHighlight />
+      <WhyChooseUsSection />
+      <QHSEPreview />
+      <CTASection />
     </div>
   );
 }
