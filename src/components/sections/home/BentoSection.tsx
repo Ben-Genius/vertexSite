@@ -17,7 +17,7 @@ export function BentoSection() {
   const y2 = useTransform(scrollYProgress, [0, 1], [20, -60]);
 
   return (
-    <section ref={sectionRef} className="bg-white py-24 lg:py-32 overflow-hidden">
+    <section ref={sectionRef} className="bg-white py-24 lg:py-32 overflow-hidden px-2">
       <div className="max-w-[90rem] mx-auto">
         {/* Header */}
         <motion.div

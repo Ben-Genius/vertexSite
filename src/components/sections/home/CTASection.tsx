@@ -37,18 +37,18 @@ export function CTASection() {
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-[64px] font-bold leading-[1.1] mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-[64px] font-bold leading-[1.1] mb-6 text-white">
               Driving engineering standards, <span className="text-gold">together.</span>
             </h2>
 
-            <p className="text-white/70 text-lg md:text-xl lg:text-2xl mb-12 max-w-2xl leading-relaxed font-light">
+            <p className="text-white/90 text-lg md:text-lg lg:text-xl mb-12 max-w-2xl leading-relaxed font-light">
               Our network highlights Vertex Ridge&apos;s commitment to excellence, seamlessly connecting elite technical capabilities with uncompromising compliance.
             </p>
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-3 bg-[#1e40af] text-white px-8 py-4 rounded-full text-[13px] font-bold tracking-widest uppercase hover:bg-gold hover:text-navy hover:shadow-lg transition-all duration-300"
-              style={{ backgroundColor: "#0066FF" }} // Blue color similar to inspiration
+              className="inline-flex items-center justify-center gap-3 bg-[#1e40af] text-white px-8 py-4 rounded-md text-[13px] font-bold tracking-widest uppercase hover:bg-gold hover:text-navy hover:shadow-lg transition-all duration-300"
+              style={{ backgroundColor: "#000000" }} // Blue color similar to inspiration
             >
               Contact Us <ArrowUpRight size={18} />
             </Link>

@@ -35,7 +35,7 @@ const pillars = [
 
 export function QHSEPreview() {
   return (
-    <section className="py-24 bg-navy overflow-hidden">
+    <section className="py-24 bg-navy overflow-hidden px-2">
       <div className="w-full max-w-[1600px] mx-auto px-5 lg:px-10">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">

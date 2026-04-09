@@ -50,10 +50,10 @@ export function WhyChooseUsSection() {
           transition={{ duration: 0.6, ease }}
           className="mb-10"
         >
-          <div className="flex items-center gap-4 mb-4">
+          {/* <div className="flex items-center gap-4 mb-4">
             <div className="w-8 h-px bg-maroon" />
             <span className="label-caps text-maroon text-[10px]">Why Vertex Ridge</span>
-          </div>
+          </div> */}
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-charcoal leading-tight">
             The Vertex Ridge <span className="text-maroon">Difference</span>
           </h2>
@@ -114,7 +114,7 @@ export function WhyChooseUsSection() {
           ))}
 
           {/* Dark accent card */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -132,7 +132,7 @@ export function WhyChooseUsSection() {
                 Proven delivery record across Ghana's most demanding projects.
               </p>
             </div>
-          </motion.div>
+          </motion.div> */}
 
         </div>
 
