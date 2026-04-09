@@ -36,7 +36,7 @@ export function HeroSection() {
         }, "-=0.2")
         .from(".hero-sub", { opacity: 0, y: 16, duration: 0.6, ease: "power3.out" }, "-=0.3")
         .from(".hero-cta", { opacity: 0, y: 12, duration: 0.5, ease: "power3.out", stagger: 0.1 }, "-=0.3")
-;
+        ;
     }, sectionRef);
 
     return () => ctx.revert();
@@ -58,7 +58,6 @@ export function HeroSection() {
           muted
           loop
           playsInline
-          poster="/hero-bg.jpg"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/heroVid.mp4" type="video/mp4" />
