@@ -51,8 +51,8 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="overflow-hidden">
-      <div className="grid lg:grid-cols-2 min-h-[80vh]">
+    <section id="contact" className="overflow-hidden ">
+      <div className="grid lg:grid-cols-2 min-h-[80vh] py-10">
         {/* Left Panel — Dark */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}

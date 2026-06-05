@@ -39,7 +39,7 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen h-[100dvh] flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen h-[100dvh] flex flex-col items-center justify-end overflow-hidden"
     >
       {/* Image Background */}
       <motion.div
@@ -74,49 +74,53 @@ export function HeroSection() {
         className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold via-gold/40 to-transparent z-20"
       />
 
-      {/* Main Content — Center Aligned */}
+      {/* Main Content — Split layout */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-20 max-w-5xl px-6 text-center text-white flex flex-col items-center justify-center"
+        className="relative z-20 w-full container-vr pb-20"
       >
-        {/* Eyebrow */}
-        <div className="hero-eyebrow flex items-center gap-3 mb-6 justify-center">
-          <div className="w-8 h-px bg-gold" />
-          <span className="label-caps text-gold/90 text-[10px]">Construction & Engineering · Ghana</span>
-          <div className="w-8 h-px bg-gold" />
-        </div>
-
-        {/* Title */}
-        <h1 className="hero-title text-center font-bold text-[clamp(2.5rem,7vw,5rem)] text-white tracking-tight leading-[1.1] mb-6">
-          Building West Africa's <span className="text-gold">Civil Infrastructure</span>
-        </h1>
-
-        {/* Subtext */}
-        <p className="hero-sub mx-auto mb-10 max-w-2xl text-center font-light text-white/90 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-          Delivering high-quality building, road, and engineering works with strict compliance, disciplined management, and absolute integrity.
-        </p>
-
-        {/* CTAs */}
-        <div className="hero-cta flex flex-col sm:flex-row items-center gap-4 justify-center">
-          <Link
-            href="/contact"
-            className="group flex cursor-pointer items-center justify-center gap-0 rounded-full border-none bg-transparent px-0 py-2 font-normal shadow-none hover:bg-transparent"
-          >
-            <span className="rounded-full bg-gold px-6 py-3 text-charcoal font-bold duration-500 ease-in-out group-hover:bg-maroon group-hover:text-white group-hover:transition-colors text-sm">
-              Start a Project
-            </span>
-            <div className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full bg-gold p-4 text-charcoal duration-500 ease-in-out group-hover:bg-maroon group-hover:text-white group-hover:transition-colors">
-              <ArrowUpRight className="absolute h-4 w-4 -translate-x-1/2 transition-all duration-500 ease-in-out group-hover:translate-x-10" />
-              <ArrowUpRight className="absolute h-4 w-4 -translate-x-10 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2" />
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 text-left w-full">
+          <div className="max-w-3xl space-y-6">
+            {/* Eyebrow */}
+            <div className="hero-eyebrow flex items-center gap-3">
+              <div className="w-8 h-px bg-gold" />
+              <span className="label-caps text-gold text-[10px]">Construction & Engineering · Ghana</span>
             </div>
-          </Link>
-          
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white font-semibold rounded-full hover:border-white/60 hover:bg-white/8 transition-all duration-300 text-sm h-[48px]"
-          >
-            View Our Work
-          </Link>
+
+            {/* Title */}
+            <h1 className="hero-title font-bold text-[clamp(2.5rem,5.5vw,4.5rem)] text-white tracking-tight leading-[1.1]">
+              Building West Africa's <span className="text-gold">Civil Infrastructure</span>
+            </h1>
+
+            {/* Subtext */}
+            <p className="hero-sub max-w-2xl font-light text-white/90 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+              Delivering high-quality building, road, and engineering works with strict compliance, disciplined management, and absolute integrity.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 lg:mt-auto">
+            {/* Start a Project (sliding icon button) */}
+            <Link
+              href="/contact"
+              className="hero-cta group flex cursor-pointer items-center justify-center gap-0 rounded-full border-none bg-transparent px-0 py-2 font-normal shadow-none hover:bg-transparent"
+            >
+              <span className="rounded-full bg-gold px-6 py-3 text-charcoal font-bold duration-500 ease-in-out group-hover:bg-maroon group-hover:text-white group-hover:transition-colors text-sm ">
+                Start a Project
+              </span>
+              <div className="relative flex h-fit cursor-pointer items-center overflow-hidden rounded-full bg-gold p-4 text-charcoal duration-500 ease-in-out group-hover:bg-maroon group-hover:text-white group-hover:transition-colors ml-1">
+                <ArrowUpRight className="absolute h-4 w-4 -translate-x-1/2 transition-all duration-500 ease-in-out group-hover:translate-x-10" />
+                <ArrowUpRight className="absolute h-4 w-4 -translate-x-10 transition-all duration-500 ease-in-out group-hover:-translate-x-1/2" />
+              </div>
+            </Link>
+
+            {/* View Our Work */}
+            <Link
+              href="/projects"
+              className="hero-cta inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white font-semibold rounded-full hover:border-white/60 hover:bg-white/8 transition-all duration-300 text-sm h-[48px]"
+            >
+              View Our Work
+            </Link>
+          </div>
         </div>
       </motion.div>
 
