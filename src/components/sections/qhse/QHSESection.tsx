@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, Award, Leaf, TrendingUp } from "lucide-react";
 import { SectionHeader } from "@/components/sections/shared/SectionHeader";
-import { CountUp } from "@/components/sections/shared/CountUp";
 
 const ease = [0.25, 0.1, 0.25, 1] as const;
 
@@ -45,12 +44,6 @@ const certifications = [
   { label: "Ghana Standard", desc: "Local Compliance" },
 ];
 
-const qhseStats = [
-  { value: "0", label: "Incident Target" },
-  { value: "100%", label: "PPE Compliance" },
-  { value: "4", label: "Certified Systems" },
-];
-
 export function QHSESection() {
   return (
     <section id="qhse" className="overflow-hidden">
@@ -74,22 +67,6 @@ export function QHSESection() {
               Our QHSE commitment is not a compliance exercise — it is built into the culture of every team we deploy, on every project we undertake.
             </p>
           </motion.div>
-        </div>
-      </div>
-
-      {/* QHSE Stats Strip */}
-      <div className="bg-maroon">
-        <div className="container-vr py-6">
-          <div className="grid grid-cols-3 divide-x divide-white/20">
-            {qhseStats.map((s, i) => (
-              <div key={i} className="text-center px-4">
-                <div className="text-3xl sm:text-4xl font-bold text-white">
-                  <CountUp value={s.value} />
-                </div>
-                <p className="label-caps text-white/60 text-[10px] mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 

@@ -15,7 +15,7 @@ const advantages = [
   {
     icon: Globe,
     title: "Deep Local Knowledge",
-    desc: "Rooted in Ghana's landscape — regulatory, community, and supply chain expertise built over 15+ years.",
+    desc: "Rooted in Ghana's landscape — regulatory, community, and supply chain expertise built over years of delivery.",
   },
   {
     icon: Award,

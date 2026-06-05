@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Shield, Users, Award, Target, ArrowRight } from "lucide-react";
-import { CountUp } from "@/components/sections/shared/CountUp";
 import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -69,21 +68,6 @@ export function TeamSection() {
       {/* Hero Intro — charcoal bg */}
       <div className="bg-charcoal py-24">
         <div className="container-vr">
-          {/* Stats row */}
-          <div className="grid grid-cols-3 gap-8 mb-16 pb-16 border-b border-white/10">
-            {[
-              { value: "50+", label: "Expert Engineers" },
-              { value: "15+", label: "Years Experience" },
-              { value: "4", label: "Delivery Phases" },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <div className="text-4xl sm:text-5xl font-bold text-white mb-1">
-                  <CountUp value={s.value} />
-                </div>
-                <p className="label-caps text-white/40 text-[10px]">{s.label}</p>
-              </div>
-            ))}
-          </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <motion.div
