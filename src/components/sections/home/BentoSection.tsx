@@ -82,8 +82,8 @@ export function BentoSection() {
               <ShieldCheck className="w-5 h-5 text-white group-hover:text-gold transition-colors duration-300" />
             </div>
             <div>
-              <div className="text-[clamp(2.5rem,8vw,3.5rem)] font-bold text-white leading-none mb-2 transform group-hover:translate-x-1 transition-transform duration-300">98%</div>
-              <p className="text-white/70 text-sm font-medium uppercase tracking-wider">Client Satisfaction Rate</p>
+              <h3 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold text-white mb-3 leading-tight transform group-hover:translate-x-1 transition-transform duration-300">Client Focused</h3>
+              <p className="text-white/70 text-sm leading-relaxed max-w-sm">Commitment to excellence and responsive communication across every project phase.</p>
             </div>
           </motion.div>
 
@@ -124,7 +124,7 @@ export function BentoSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent group-hover:opacity-75 transition-opacity duration-300" />
             <div className="absolute bottom-0 left-0 right-0 p-7 transform group-hover:translate-y-[-4px] transition-transform duration-300">
               <span className="label-caps text-gold text-[9px] mb-2 block">Portfolio</span>
-              <h3 className="text-[clamp(1.25rem,3vw,1.5rem)] font-bold text-white group-hover:text-gold transition-colors duration-300">200+ Projects<br />Delivered</h3>
+              <h3 className="text-[clamp(1.25rem,3vw,1.5rem)] font-bold text-white group-hover:text-gold transition-colors duration-300">Infrastructure<br />Projects</h3>
             </div>
           </motion.div>
 
@@ -166,8 +166,10 @@ export function BentoSection() {
               <Zap className="w-5 h-5 text-maroon group-hover:text-gold transition-colors duration-300" />
             </div>
             <div>
-              <div className="text-[clamp(2.5rem,8vw,3.5rem)] font-bold text-charcoal leading-none mb-2 transform group-hover:translate-x-1 transition-transform duration-300">15+</div>
-              <p className="text-charcoal/45 text-sm font-medium uppercase tracking-wider">Years Experience</p>
+              <h3 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold text-charcoal mb-3 leading-tight transform group-hover:translate-x-1 transition-transform duration-300">Proven Expertise</h3>
+              <p className="text-charcoal/50 text-sm leading-relaxed">
+                A skilled multidisciplinary team delivering reliable engineering solutions.
+              </p>
             </div>
           </motion.div>
 

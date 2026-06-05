@@ -15,7 +15,7 @@ const advantages = [
   {
     icon: Globe,
     title: "Deep Local Knowledge",
-    desc: "Rooted in Ghana's landscape — regulatory, community, and supply chain expertise built over 15+ years.",
+    desc: "Rooted in Ghana's landscape — regulatory, community, and supply chain expertise built over years of delivery.",
   },
   {
     icon: Award,
@@ -144,7 +144,7 @@ export function WhyChooseUsSection() {
           transition={{ duration: 0.6, ease }}
           className="rounded-2xl overflow-hidden border border-charcoal/8 bg-white shadow-sm"
         >
-          <div className="grid grid-cols-3 bg-charcoal">
+          <div className="hidden sm:grid sm:grid-cols-3 bg-charcoal">
             <div className="p-4 text-[10px] font-mono font-bold tracking-[0.2em] text-white/40 uppercase">Feature</div>
             <div className="p-4 text-[10px] font-mono font-bold tracking-[0.2em] text-white/40 uppercase border-l border-white/8">Others</div>
             <div className="p-4 text-[10px] font-mono font-bold tracking-[0.2em] text-gold uppercase border-l border-white/8">Vertex Ridge</div>
@@ -152,16 +152,18 @@ export function WhyChooseUsSection() {
           {comparisons.map((row, i) => (
             <div
               key={i}
-              className={`grid grid-cols-3 border-t border-charcoal/6 ${i % 2 === 0 ? "bg-[#fafaf9]" : "bg-white"}`}
+              className={`flex flex-col sm:grid sm:grid-cols-3 border-t border-charcoal/6 ${i % 2 === 0 ? "bg-[#fafaf9]" : "bg-white"}`}
             >
-              <div className="p-4 text-sm font-semibold text-charcoal">{row.feature}</div>
-              <div className="p-4 text-sm text-charcoal/40 border-l border-charcoal/6 flex items-center gap-2">
+              <div className="p-4 text-sm font-semibold text-charcoal bg-charcoal/5 sm:bg-transparent">{row.feature}</div>
+              <div className="p-4 text-sm text-charcoal/40 sm:border-l border-charcoal/6 flex items-center gap-2">
                 <X size={12} className="text-charcoal/20 flex-shrink-0" />
-                {row.others}
+                <span className="sm:hidden font-semibold text-xs text-charcoal/40 uppercase tracking-wider mr-1">Others:</span>
+                <span>{row.others}</span>
               </div>
-              <div className="p-4 text-sm text-charcoal font-semibold border-l border-charcoal/6 flex items-center gap-2">
+              <div className="p-4 text-sm text-charcoal font-semibold sm:border-l border-charcoal/6 flex items-center gap-2 border-t border-charcoal/6 sm:border-t-0">
                 <CheckCircle2 size={12} className="text-maroon flex-shrink-0" />
-                {row.vertex}
+                <span className="sm:hidden font-semibold text-xs text-maroon uppercase tracking-wider mr-1">Vertex Ridge:</span>
+                <span>{row.vertex}</span>
               </div>
             </div>
           ))}

@@ -14,7 +14,7 @@ export default function Home() {
       <HeroSection />
       <IntroSection />
       <HorizontalScroll />
-      <BentoSection />
+      {/* <BentoSection /> */}
       <CapsuleSection />
       <QHSEPreview />
 

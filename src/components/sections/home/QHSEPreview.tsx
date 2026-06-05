@@ -78,20 +78,20 @@ export function QHSEPreview() {
               <img
                 src={pillar.image}
                 alt={pillar.title}
-                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                className="absolute inset-0 w-full h-full object-cover lg:grayscale lg:group-hover:grayscale-0 transition-all duration-700 scale-100 lg:scale-105 lg:group-hover:scale-100"
               />
-              <div className="absolute inset-0 bg-navy/70 group-hover:bg-navy/50 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-navy/55 lg:bg-navy/70 lg:group-hover:bg-navy/50 transition-colors duration-500" />
 
               {/* Content */}
               <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[460px]">
                 <span className="text-5xl font-bold text-white/15 mb-auto block">{pillar.number}</span>
-                <div className="transform group-hover:translate-x-1 transition-transform duration-500">
-                  <div className="flex items-center gap-2 mb-4 transform group-hover:scale-105 transition-transform duration-300 origin-left">
+                <div className="transform lg:group-hover:translate-x-1 transition-transform duration-500">
+                  <div className="flex items-center gap-2 mb-4 transform lg:group-hover:scale-105 transition-transform duration-300 origin-left">
                     <ShieldCheck size={16} className="text-gold" />
                     <span className="label-caps text-gold text-xs">QHSE</span>
                   </div>
-                  <h4 className="font-bold text-white text-xl mb-3 group-hover:text-gold transition-colors duration-300">{pillar.title}</h4>
-                  <p className="text-white/70 text-base leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-h-0 group-hover:max-h-32 overflow-hidden">
+                  <h4 className="font-bold text-white text-xl mb-3 lg:text-white lg:group-hover:text-gold transition-colors duration-300">{pillar.title}</h4>
+                  <p className="text-white/70 text-base leading-relaxed opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-500 max-h-40 lg:max-h-0 lg:group-hover:max-h-32 overflow-hidden">
                     {pillar.desc}
                   </p>
                 </div>

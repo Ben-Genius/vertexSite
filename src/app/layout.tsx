@@ -6,6 +6,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 
+import { Analytics } from "@vercel/analytics/react";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -61,6 +63,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </LenisProvider>
+        <Analytics />
         <Toaster />
       </body>
     </html>
