@@ -7,7 +7,7 @@ import { SectionHeader } from "@/components/sections/shared/SectionHeader";
 const ease = [0.25, 0.1, 0.25, 1] as const;
 
 const comparisons = [
-  { feature: "Local Knowledge", others: "External firms with no local context", vertex: "Deep Ghana roots — 15+ years on local sites" },
+  { feature: "Local Knowledge", others: "External firms with no local context", vertex: "Deep Ghana roots — years of experience on local sites" },
   { feature: "Regulatory Navigation", others: "Outsourced or delayed approvals", vertex: "In-house expertise on GHA regulatory framework" },
   { feature: "Community Engagement", others: "Ad hoc, reactive approach", vertex: "Structured community liaison from day one" },
   { feature: "Resource Management", others: "Standard billing regardless of efficiency", vertex: "Value-for-money with transparent cost monitoring" },
@@ -17,7 +17,7 @@ const comparisons = [
 
 const advantages = [
   { icon: Shield, title: "Safety-First Culture", desc: "Zero-incident target on every site. HSE compliance is non-negotiable." },
-  { icon: Globe, title: "Deep Local Knowledge", desc: "15+ years navigating Ghana's regulatory and community landscape." },
+  { icon: Globe, title: "Deep Local Knowledge", desc: "Proven track record navigating Ghana's regulatory and community landscape." },
   { icon: Award, title: "ISO Certified Quality", desc: "ISO 9001:2015 certified processes on every deliverable." },
   { icon: Zap, title: "End-to-End Delivery", desc: "From design through to commissioning — one accountable partner." },
 ];
@@ -41,7 +41,7 @@ export function WhyChooseUsSection() {
           className="mb-16 rounded-2xl overflow-hidden border border-charcoal/8 shadow-sm"
         >
           {/* Header */}
-          <div className="grid grid-cols-[1fr,1fr,1.2fr] bg-charcoal">
+          <div className="hidden sm:grid sm:grid-cols-[1fr,1fr,1.2fr] bg-charcoal">
             <div className="p-5 text-xs font-bold uppercase tracking-widest text-white/40">Feature</div>
             <div className="p-5 text-xs font-bold uppercase tracking-widest text-white/40 border-l border-white/8">Other Contractors</div>
             <div className="p-5 text-xs font-bold uppercase tracking-widest text-gold border-l border-white/8">Vertex Ridge</div>
@@ -54,15 +54,17 @@ export function WhyChooseUsSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06, ease }}
-              className={`grid grid-cols-[1fr,1fr,1.2fr] border-t border-charcoal/6 ${i % 2 === 0 ? "bg-sand/30" : "bg-white"}`}
+              className={`flex flex-col sm:grid sm:grid-cols-[1fr,1fr,1.2fr] border-t border-charcoal/6 ${i % 2 === 0 ? "bg-sand/30" : "bg-white"}`}
             >
-              <div className="p-5 text-sm font-semibold text-charcoal">{row.feature}</div>
-              <div className="p-5 text-sm text-charcoal/40 border-l border-charcoal/6 flex items-start gap-2">
+              <div className="p-5 text-sm font-semibold text-charcoal bg-charcoal/5 sm:bg-transparent">{row.feature}</div>
+              <div className="p-5 text-sm text-charcoal/40 sm:border-l border-charcoal/6 flex items-start gap-2">
                 <X size={13} className="text-charcoal/20 flex-shrink-0 mt-0.5" />
+                <span className="sm:hidden font-semibold text-xs text-charcoal/40 uppercase tracking-wider mr-1">Others:</span>
                 <span>{row.others}</span>
               </div>
-              <div className="p-5 text-sm font-semibold text-charcoal border-l border-charcoal/6 flex items-start gap-2">
+              <div className="p-5 text-sm font-semibold text-charcoal sm:border-l border-charcoal/6 flex items-start gap-2 border-t border-charcoal/6 sm:border-t-0">
                 <CheckCircle2 size={13} className="text-gold flex-shrink-0 mt-0.5" />
+                <span className="sm:hidden font-semibold text-xs text-gold uppercase tracking-wider mr-1">Vertex Ridge:</span>
                 <span>{row.vertex}</span>
               </div>
             </motion.div>

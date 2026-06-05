@@ -1,0 +1,37 @@
+▲ Next.js 16.2.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.100.52:3000
+- Environments: .env
+✓ Ready in 200ms
+
+ GET / 200 in 266ms (next.js: 94ms, application-code: 172ms)
+ GET / 200 in 66ms (next.js: 8ms, application-code: 59ms)
+⚠ Blocked cross-origin request to Next.js dev resource /_next/webpack-hmr from "192.168.100.52".
+Cross-origin access to Next.js dev resources is blocked by default for safety.
+
+To allow this host in development, add it to "allowedDevOrigins" in next.config.js and restart the dev server:
+
+// next.config.js
+module.exports = {
+  allowedDevOrigins: ['192.168.100.52'],
+}
+
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 97ms (next.js: 14ms, application-code: 84ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 88ms (next.js: 10ms, application-code: 77ms)
+ GET / 200 in 69ms (next.js: 14ms, application-code: 55ms)
+ GET / 200 in 115ms (next.js: 22ms, application-code: 93ms)
+ GET / 200 in 118ms (next.js: 30ms, application-code: 89ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 58ms (next.js: 9ms, application-code: 49ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 91ms (next.js: 15ms, application-code: 76ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 69ms (next.js: 10ms, application-code: 59ms)
+ GET / 200 in 63ms (next.js: 6ms, application-code: 57ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 101ms (next.js: 35ms, application-code: 66ms)
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+ GET / 200 in 81ms (next.js: 19ms, application-code: 62ms)
