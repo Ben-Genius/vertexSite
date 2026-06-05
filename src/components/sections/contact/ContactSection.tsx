@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Send, CheckCircle2 } from "lucide-react";
 import { ChronicleButton } from "@/components/ui/chronicle-button";
+import { useToast } from "@/hooks/use-toast";
 
 const ease = [0.25, 0.1, 0.25, 1] as const;
 
@@ -16,27 +17,15 @@ const projectTypes = [
   "Other",
 ];
 
-const budgetRanges = [
-  "Under $50,000",
-  "$50,000 – $200,000",
-  "$200,000 – $1,000,000",
-  "$1,000,000+",
-  "Not specified",
-];
 
-const timelines = [
-  "ASAP",
-  "Within 3 months",
-  "3 – 6 months",
-  "6+ months",
-  "Flexible",
-];
 
 export function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
-    firstName: "", lastName: "", email: "", phone: "",
-    projectType: "", budget: "", timeline: "", message: "",
+    fullName: "", email: "", phone: "",
+    projectType: "", message: "",
   });
 
   const handleChange = (
@@ -45,9 +34,31 @@ export function ContactSection() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -149,23 +160,16 @@ export function ContactSection() {
               </div>
 
               {/* Name row */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                {[
-                  { name: "firstName", placeholder: "First name" },
-                  { name: "lastName", placeholder: "Last name" },
-                ].map((f) => (
-                  <div key={f.name} className="border-b border-charcoal/15 pb-1 focus-within:border-gold transition-colors">
-                    <input
-                      type="text"
-                      name={f.name}
-                      placeholder={f.placeholder}
-                      value={formData[f.name as keyof typeof formData]}
-                      onChange={handleChange}
-                      required
-                      className="w-full bg-transparent text-charcoal placeholder:text-charcoal/35 text-sm focus:outline-none py-2"
-                    />
-                  </div>
-                ))}
+              <div className="border-b border-charcoal/15 pb-1 focus-within:border-gold transition-colors">
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-transparent text-charcoal placeholder:text-charcoal/35 text-sm focus:outline-none py-2"
+                />
               </div>
 
               {/* Email + Phone */}
@@ -201,31 +205,7 @@ export function ContactSection() {
                 </select>
               </div>
 
-              {/* Budget + Timeline */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="border-b border-charcoal/15 pb-1 focus-within:border-gold transition-colors">
-                  <select
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    className="w-full bg-transparent text-charcoal text-sm focus:outline-none py-2 appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled>Budget range</option>
-                    {budgetRanges.map((b) => <option key={b} value={b}>{b}</option>)}
-                  </select>
-                </div>
-                <div className="border-b border-charcoal/15 pb-1 focus-within:border-gold transition-colors">
-                  <select
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    className="w-full bg-transparent text-charcoal text-sm focus:outline-none py-2 appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled>Timeline</option>
-                    {timelines.map((t) => <option key={t} value={t}>{t}</option>)}
-                  </select>
-                </div>
-              </div>
+
 
               {/* Message */}
               <div className="border-b border-charcoal/15 pb-1 focus-within:border-gold transition-colors">
@@ -243,10 +223,11 @@ export function ContactSection() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-3 py-4 bg-maroon text-white font-bold rounded-full hover:bg-gold hover:text-charcoal transition-all duration-300 text-sm"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-3 py-4 bg-maroon text-white font-bold rounded-full hover:bg-gold hover:text-charcoal transition-all duration-300 text-sm disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Send Message
-                <Send size={15} />
+                {isSubmitting ? "Sending..." : "Send Message"}
+                {!isSubmitting && <Send size={15} />}
               </button>
             </form>
           )}
