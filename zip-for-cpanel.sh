@@ -10,7 +10,7 @@ rm -rf out
 rm -f vertex_deploy.zip
 
 # 2. Build (generates static files in out/)
-npm run build
+yarn build
 
 # 3. Zip the out/ directory contents (not the folder itself)
 cd out
